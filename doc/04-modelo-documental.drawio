@@ -1,0 +1,89 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Modelo documental" id="mod1">
+    <mxGraphModel dx="2397" dy="1286" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="users" parent="1" style="swimlane;fontStyle=1;fontSize=13;startSize=30;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;swimlaneFillColor=#ffffff;" value="users" vertex="1">
+          <mxGeometry height="255" width="380" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="users_t" parent="users" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;whiteSpace=wrap;overflow=hidden;fontFamily=Courier New;fontSize=11;" value="_id: ObjectId&lt;br&gt;name: string&lt;br&gt;email: string&lt;br&gt;passwordHash: string&lt;br&gt;role: &quot;admin&quot; | &quot;user&quot;&lt;br&gt;active: boolean&lt;br&gt;storageUsed: number  (bytes)&lt;br&gt;createdAt: Date&lt;br&gt;updatedAt: Date&lt;br&gt;lastLoginAt: Date | null&lt;br&gt;&lt;hr&gt;&lt;i&gt;&lt;b&gt;Índices&lt;/b&gt;&lt;/i&gt;&lt;br&gt;{ email: 1 }  unique&lt;br&gt;{ role: 1, active: 1 }&lt;br&gt;" vertex="1">
+          <mxGeometry height="225" width="380" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="folders" parent="1" style="swimlane;fontStyle=1;fontSize=13;startSize=30;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;swimlaneFillColor=#ffffff;" value="folders" vertex="1">
+          <mxGeometry height="300" width="380" x="480" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="folders_t" parent="folders" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;whiteSpace=wrap;overflow=hidden;fontFamily=Courier New;fontSize=11;" value="_id: ObjectId&lt;br&gt;name: string&lt;br&gt;ownerId: ObjectId → users&lt;br&gt;parentId: ObjectId | null → folders&lt;br&gt;ancestors: [ObjectId]  (raíz → padre)&lt;br&gt;deleted: boolean&lt;br&gt;deletedAt: Date | null&lt;br&gt;deletedRootId: ObjectId | null&lt;br&gt;createdAt: Date&lt;br&gt;updatedAt: Date&lt;br&gt;&lt;hr&gt;&lt;i&gt;&lt;b&gt;Índices&lt;/b&gt;&lt;/i&gt;&lt;br&gt;{ ownerId:1, parentId:1, deleted:1 }&lt;br&gt;{ ancestors: 1 }&lt;br&gt;{ ownerId:1, deleted:1, deletedAt:-1 }&lt;br&gt;{ ownerId:1, parentId:1, name:1 }&lt;br&gt;  unique, parcial (deleted:false)&lt;br&gt;" vertex="1">
+          <mxGeometry height="270" width="380" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="files" parent="1" style="swimlane;fontStyle=1;fontSize=13;startSize=30;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;swimlaneFillColor=#ffffff;" value="files" vertex="1">
+          <mxGeometry height="360" width="380" x="920" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="files_t" parent="files" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;whiteSpace=wrap;overflow=hidden;fontFamily=Courier New;fontSize=11;" value="_id: ObjectId&lt;br&gt;name: string  (con extensión)&lt;br&gt;extension: &quot;txt&quot; | &quot;md&quot;&lt;br&gt;mimeType: string&lt;br&gt;size: number  (bytes)&lt;br&gt;ownerId: ObjectId → users&lt;br&gt;folderId: ObjectId | null → folders&lt;br&gt;contentId: ObjectId → contents.files&lt;br&gt;deleted: boolean&lt;br&gt;deletedAt: Date | null&lt;br&gt;deletedRootId: ObjectId | null&lt;br&gt;createdAt: Date&lt;br&gt;updatedAt: Date&lt;br&gt;&lt;hr&gt;&lt;i&gt;&lt;b&gt;Índices&lt;/b&gt;&lt;/i&gt;&lt;br&gt;{ ownerId:1, folderId:1, deleted:1 }&lt;br&gt;{ ownerId:1, deleted:1, deletedAt:-1 }&lt;br&gt;{ name: &quot;text&quot; }&lt;br&gt;{ extension:1 }   { createdAt:-1 }&lt;br&gt;{ ownerId:1, folderId:1, name:1 }&lt;br&gt;  unique, parcial (deleted:false)&lt;br&gt;" vertex="1">
+          <mxGeometry height="330" width="380" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="activity" parent="1" style="swimlane;fontStyle=1;fontSize=13;startSize=30;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;swimlaneFillColor=#ffffff;" value="activity" vertex="1">
+          <mxGeometry height="315" width="380" x="40" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="activity_t" parent="activity" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;whiteSpace=wrap;overflow=hidden;fontFamily=Courier New;fontSize=11;" value="_id: ObjectId&lt;br&gt;&lt;span style=&quot;background-color:#d5e8d4;&quot;&gt;user: { _id → users, name }&lt;/span&gt;&lt;br&gt;action: string&lt;br&gt;  login, upload, download, rename, move,&lt;br&gt;  edit, delete, restore, delete_permanent,&lt;br&gt;  create_folder, share, update_share,&lt;br&gt;  revoke_share, comment&lt;br&gt;&lt;span style=&quot;background-color:#d5e8d4;&quot;&gt;resource: { type, _id, name,&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;background-color:#d5e8d4;&quot;&gt;            ownerId } | null&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;background-color:#d5e8d4;&quot;&gt;details: { ... }  (ej. from, to, permission)&lt;/span&gt;&lt;br&gt;createdAt: Date&lt;br&gt;&lt;hr&gt;&lt;i&gt;&lt;b&gt;Índices&lt;/b&gt;&lt;/i&gt;&lt;br&gt;{ user._id:1, createdAt:-1 }&lt;br&gt;{ resource._id:1, createdAt:-1 }&lt;br&gt;{ resource.ownerId:1, createdAt:-1 }&lt;br&gt;{ action:1 }   { createdAt:-1 }&lt;br&gt;Nunca se elimina (auditoría).&lt;br&gt;" vertex="1">
+          <mxGeometry height="285" width="380" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="shares" parent="1" style="swimlane;fontStyle=1;fontSize=13;startSize=30;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;swimlaneFillColor=#ffffff;" value="shares" vertex="1">
+          <mxGeometry height="255" width="380" x="480" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="shares_t" parent="shares" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;whiteSpace=wrap;overflow=hidden;fontFamily=Courier New;fontSize=11;" value="_id: ObjectId&lt;br&gt;resourceType: &quot;file&quot; | &quot;folder&quot;&lt;br&gt;resourceId: ObjectId → files | folders&lt;br&gt;ownerId: ObjectId → users&lt;br&gt;sharedWithId: ObjectId → users&lt;br&gt;permission: &quot;read&quot; | &quot;comment&quot; | &quot;edit&quot;&lt;br&gt;createdAt: Date&lt;br&gt;updatedAt: Date&lt;br&gt;&lt;hr&gt;&lt;i&gt;&lt;b&gt;Índices&lt;/b&gt;&lt;/i&gt;&lt;br&gt;{ resourceType:1, resourceId:1,&lt;br&gt;  sharedWithId:1 }  unique&lt;br&gt;{ sharedWithId:1, resourceType:1 }&lt;br&gt;{ ownerId:1, createdAt:-1 }&lt;br&gt;" vertex="1">
+          <mxGeometry height="225" width="380" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="comments" parent="1" style="swimlane;fontStyle=1;fontSize=13;startSize=30;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;swimlaneFillColor=#ffffff;" value="comments" vertex="1">
+          <mxGeometry height="165" width="380" x="920" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="comments_t" parent="comments" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;whiteSpace=wrap;overflow=hidden;fontFamily=Courier New;fontSize=11;" value="_id: ObjectId&lt;br&gt;fileId: ObjectId → files&lt;br&gt;&lt;span style=&quot;background-color:#d5e8d4;&quot;&gt;author: { _id → users, name }&lt;/span&gt;&lt;br&gt;text: string&lt;br&gt;createdAt: Date&lt;br&gt;&lt;hr&gt;&lt;i&gt;&lt;b&gt;Índices&lt;/b&gt;&lt;/i&gt;&lt;br&gt;{ fileId:1, createdAt:1 }&lt;br&gt;" vertex="1">
+          <mxGeometry height="135" width="380" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="contents" parent="1" style="swimlane;fontStyle=1;fontSize=13;startSize=30;align=center;fillColor=#e1d5e7;strokeColor=#9673a6;swimlaneFillColor=#ffffff;" value="GridFS · contents.files / chunks" vertex="1">
+          <mxGeometry height="269" width="380" x="920" y="675" as="geometry" />
+        </mxCell>
+        <mxCell id="contents_t" parent="contents" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;whiteSpace=wrap;overflow=hidden;fontFamily=Courier New;fontSize=11;" value="&lt;b&gt;contents.files&lt;/b&gt;  (bucket &quot;contents&quot;)&lt;br&gt;_id: ObjectId  ← files.contentId&lt;br&gt;filename: string&lt;br&gt;length: number&lt;br&gt;chunkSize: number&lt;br&gt;uploadDate: Date&lt;br&gt;&lt;span style=&quot;background-color:#d5e8d4;&quot;&gt;metadata: { ownerId, fileId }&lt;/span&gt;&lt;br&gt;&lt;hr&gt;&lt;b&gt;contents.chunks&lt;/b&gt;&lt;br&gt;files_id: ObjectId → contents.files&lt;br&gt;n: number&lt;br&gt;data: BinData&lt;br&gt;&lt;hr&gt;&lt;i&gt;&lt;b&gt;Índices&lt;/b&gt;&lt;/i&gt;&lt;br&gt;{ files_id:1, n:1 }  unique (automático)&lt;br&gt;" vertex="1">
+          <mxGeometry height="239" width="380" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;startArrow=ERmandOne;endArrow=ERmany;startFill=0;endFill=0;" target="folders" value="ownerId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;startArrow=ERmandOne;endArrow=ERmany;startFill=0;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="files" value="ownerId">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="25" />
+              <mxPoint x="1110" y="25" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="folders" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;startArrow=ERmandOne;endArrow=ERmany;startFill=0;endFill=0;" target="files" value="folderId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;startArrow=ERmandOne;endArrow=ERmany;startFill=0;endFill=0;dashed=1;" target="activity" value="user._id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="folders" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;startArrow=ERmandOne;endArrow=ERmany;startFill=0;endFill=0;dashed=1;" target="shares" value="resourceId (folder)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;startArrow=ERmandOne;endArrow=ERmany;startFill=0;endFill=0;dashed=1;exitX=0;exitY=1;exitDx=0;exitDy=-30;entryX=1;entryY=0;entryDx=0;entryDy=40;" target="shares" value="resourceId (file)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;startArrow=ERmandOne;endArrow=ERmany;startFill=0;endFill=0;" target="comments" value="fileId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;startArrow=ERmandOne;endArrow=ERmany;startFill=0;endFill=0;startArrow=ERmandOne;endArrow=ERmandOne;" target="contents" value="contentId">
+          <mxGeometry relative="1" x="0.8039" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="notes" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;Decisiones de diseño&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;Referencias&lt;/b&gt; (colecciones separadas): users, folders, files, shares, comments y activity. Crecen sin límite o se consultan desde varios lados.&lt;br&gt;&lt;br&gt;• &lt;b&gt;Embebido&lt;/b&gt; (verde): &lt;i&gt;author&lt;/i&gt; en comments y &lt;i&gt;user / resource / details&lt;/i&gt; en activity. Son copias históricas que se leen junto al documento y no deben cambiar si el usuario o recurso cambia o se elimina.&lt;br&gt;&lt;br&gt;• &lt;b&gt;ancestors&lt;/b&gt; en folders: guarda la ruta desde la raíz. Permite detectar ciclos al mover (¿nuevoPadre.ancestors incluye id?) y obtener todos los descendientes con un solo filtro.&lt;br&gt;&lt;br&gt;• &lt;b&gt;shares separada&lt;/b&gt;: se consulta por propietario y por receptor, aplica a archivos y carpetas y alimenta los reportes. Un recurso es accesible si el usuario es propietario o tiene un share sobre el recurso, su carpeta o alguno de sus ancestors.&lt;br&gt;&lt;br&gt;• &lt;b&gt;Papelera&lt;/b&gt;: borrado lógico (deleted). Al borrar una carpeta se marcan sus descendientes con deletedRootId. La papelera lista solo los elementos con _id = deletedRootId. Al restaurar, si el padre ya no existe se mueve a la raíz.&lt;br&gt;&lt;br&gt;• &lt;b&gt;storageUsed&lt;/b&gt;: suma al subir, resta al eliminar definitivamente (la papelera sigue contando).&lt;br&gt;&lt;br&gt;• &lt;b&gt;Contenido&lt;/b&gt;: en GridFS (bucket contents), nunca como ruta local.&lt;br&gt;&lt;br&gt;• &lt;b&gt;Reportes&lt;/b&gt;: se resuelven con aggregate sobre files, shares y activity (group, match, lookup).&lt;br&gt;&lt;br&gt;&lt;b&gt;Leyenda&lt;/b&gt;&lt;br&gt;→ referencia por _id (sin integridad automática, la valida el servidor)&lt;br&gt;&lt;span&gt;verde &lt;/span&gt;= documento embebido&lt;br&gt;Línea continua = relación directa · punteada = referencia lógica" vertex="1">
+          <mxGeometry height="560" width="380" x="480" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="title" parent="1" style="text;html=1;align=left;fontStyle=1;fontSize=16;" value="Modelo documental · Sistema de Gestión Documental (MongoDB)" vertex="1">
+          <mxGeometry height="25" width="700" x="40" y="35" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
