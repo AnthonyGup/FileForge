@@ -1,0 +1,14 @@
+<header class="navbar">
+  <button class="navbar__toggle" (click)="layout.toggleSidebar()" aria-label="Menú">
+    ☰
+  </button>
+
+  <h1 class="navbar__title">Gestor Documental</h1>
+
+  <div class="navbar__spacer"></div>
+
+  <div class="navbar__user">
+    <span class="navbar__avatar">{{ userName.charAt(0) }}</span>
+    <span class="navbar__name">{{ userName }}</span>
+  </div>
+</header>

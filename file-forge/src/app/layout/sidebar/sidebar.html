@@ -1,0 +1,14 @@
+<aside class="sidebar" [class.sidebar--open]="layout.sidebarOpen()">
+  <nav>
+    @for (item of items; track item.route) {
+      <a
+        class="sidebar__link"
+        [routerLink]="item.route"
+        routerLinkActive="sidebar__link--active"
+      >
+        <span class="sidebar__icon">{{ item.icon }}</span>
+        <span>{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+</aside>
