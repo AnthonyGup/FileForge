@@ -1,0 +1,80 @@
+<section class="shares">
+  <header class="shares__header">
+    <div>
+      <h2 class="shares__title">{{ title() }}</h2>
+      <p class="shares__subtitle">{{ subtitle() }}</p>
+    </div>
+    <button type="button" class="btn" [disabled]="loading()" (click)="reload()">Actualizar</button>
+  </header>
+
+  @if (loading()) {
+    <p class="shares__state">Cargando...</p>
+  } @else if (error()) {
+    <div class="shares__state shares__state--error" role="alert">
+      <p>{{ error() }}</p>
+      <button type="button" class="btn" (click)="reload()">Reintentar</button>
+    </div>
+  } @else if (shares().length === 0) {
+    <p class="shares__state">
+      @if (mode() === 'by-me') {
+        Todavía no compartiste ningún recurso.
+      } @else {
+        Nadie compartió recursos contigo todavía.
+      }
+    </p>
+  } @else {
+    <div class="shares__wrap">
+      <table class="shares__table">
+        <thead>
+          <tr>
+            <th>Recurso</th>
+            <th>{{ mode() === 'by-me' ? 'Compartido con' : 'Propietario' }}</th>
+            <th>Permiso</th>
+            <th>Actualizado</th>
+            <th class="shares__actions-head"><span class="sr-only">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (share of shares(); track share.id) {
+            <tr>
+              <td>
+                <span class="shares__icon" aria-hidden="true">{{ icon(share) }}</span>
+                <a class="shares__name" [routerLink]="link(share)">{{ share.resourceName }}</a>
+                <span class="shares__type">{{ share.resourceType === 'folder' ? 'Carpeta' : 'Archivo' }}</span>
+              </td>
+              <td>{{ mode() === 'by-me' ? share.sharedWithName : share.ownerName }}</td>
+              <td><span class="shares__perm">{{ labels[share.permission] }}</span></td>
+              <td>{{ share.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td class="shares__actions">
+                <a
+                  class="icon-btn"
+                  [routerLink]="link(share)"
+                  title="Abrir"
+                  [attr.aria-label]="'Abrir ' + share.resourceName"
+                >↗</a>
+                @if (mode() === 'by-me') {
+                  <button
+                    type="button"
+                    class="icon-btn"
+                    title="Gestionar acceso"
+                    [attr.aria-label]="'Gestionar acceso a ' + share.resourceName"
+                    (click)="openManage(share)"
+                  >👥</button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>
+
+@if (managing(); as share) {
+  <app-share-dialog
+    [resourceType]="share.resourceType"
+    [resourceId]="share.resourceId"
+    [resourceName]="share.resourceName"
+    (cancelled)="closeManage()"
+  />
+}

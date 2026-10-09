@@ -26,6 +26,11 @@ export const routes: Routes = [
           import('./features/explorer/explorer').then(m => m.Explorer)
       },
       {
+        path: 'file/:fileId',
+        loadComponent: () =>
+          import('./features/files/file-viewer/file-viewer').then(m => m.FileViewer)
+      },
+      {
         path: 'shared-by-me',
         loadComponent: () =>
           import('./features/sharing/shared-by-me/shared-by-me').then(m => m.SharedByMe)

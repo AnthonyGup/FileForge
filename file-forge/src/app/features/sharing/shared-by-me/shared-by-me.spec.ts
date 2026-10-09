@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
+import { provideApi } from '@app/core/api';
 import { SharedByMe } from './shared-by-me';
 
 describe('SharedByMe', () => {
@@ -9,6 +11,7 @@ describe('SharedByMe', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SharedByMe],
+      providers: [provideRouter([]), provideApi()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SharedByMe);

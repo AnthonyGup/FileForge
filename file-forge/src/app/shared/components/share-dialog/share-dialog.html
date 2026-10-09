@@ -1,0 +1,84 @@
+<app-dialog [title]="'Compartir ' + resourceName()" (closed)="cancelled.emit()">
+  @if (loading()) {
+    <p class="share__state">Cargando...</p>
+  } @else if (loadError()) {
+    <p class="share__state share__state--error" role="alert">{{ loadError() }}</p>
+  } @else {
+    <section class="share__add">
+      <label class="field">
+        <span>Persona</span>
+        <select [value]="selectedUserId()" (change)="onUserChange($any($event.target).value)">
+          <option value="">Selecciona un usuario</option>
+          @for (user of availableUsers(); track user.id) {
+            <option [value]="user.id">{{ user.name }} ({{ user.email }})</option>
+          }
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Permiso</span>
+        <select [value]="selectedPermission()" (change)="onPermissionChange($any($event.target).value)">
+          @for (p of permissions; track p) {
+            <option [value]="p">{{ labels[p] }}</option>
+          }
+        </select>
+      </label>
+
+      <button
+        type="button"
+        class="btn btn--primary"
+        [disabled]="!selectedUserId() || busy()"
+        (click)="share()"
+      >
+        Compartir
+      </button>
+    </section>
+
+    <section class="share__list">
+      <h3>Con acceso ({{ shares().length }})</h3>
+
+      @if (shares().length === 0) {
+        <p class="share__state">Todavía no compartiste este recurso.</p>
+      } @else {
+        <ul>
+          @for (share of shares(); track share.id) {
+            <li>
+              <span class="share__who">{{ share.sharedWithName }}</span>
+
+              <select
+                class="share__perm"
+                [value]="share.permission"
+                [disabled]="busy()"
+                [attr.aria-label]="'Permiso de ' + share.sharedWithName"
+                (change)="changePermission(share, $any($event.target).value)"
+              >
+                @for (p of permissions; track p) {
+                  <option [value]="p">{{ labels[p] }}</option>
+                }
+              </select>
+
+              <button
+                type="button"
+                class="icon-btn"
+                title="Retirar acceso"
+                [attr.aria-label]="'Retirar acceso a ' + share.sharedWithName"
+                [disabled]="busy()"
+                (click)="revoke(share)"
+              >
+                {{ revokingId() === share.id ? '⏳' : '🗑️' }}
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+
+    @if (actionError()) {
+      <div class="form-alert" role="alert">{{ actionError() }}</div>
+    }
+  }
+
+  <div class="dialog-actions">
+    <button type="button" class="btn" (click)="cancelled.emit()">Cerrar</button>
+  </div>
+</app-dialog>

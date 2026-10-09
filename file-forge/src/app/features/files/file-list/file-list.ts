@@ -11,6 +11,7 @@ import { Toast } from '@app/core/services/toast';
 import { ConfirmDialog } from '@app/shared/components/confirm-dialog/confirm-dialog';
 import { MoveDialog } from '@app/shared/components/move-dialog/move-dialog';
 import { Pagination } from '@app/shared/components/pagination/pagination';
+import { ShareDialog } from '@app/shared/components/share-dialog/share-dialog';
 import { FileSizePipe } from '@app/shared/pipes/file-size-pipe';
 import { FileRenameDialog } from '../file-rename-dialog/file-rename-dialog';
 import { DEFAULT_FILTERS, FileFilterBar, FileFilterState } from '../file-filter-bar/file-filter-bar';
@@ -20,7 +21,7 @@ type SortDir = NonNullable<FileFilters['sortDir']>;
 
 @Component({
   selector: 'app-file-list',
-  imports: [DatePipe, UpperCasePipe, RouterLink, Pagination, FileSizePipe, ConfirmDialog, MoveDialog, FileRenameDialog, FileFilterBar],
+  imports: [DatePipe, UpperCasePipe, RouterLink, Pagination, FileSizePipe, ConfirmDialog, MoveDialog, FileRenameDialog, FileFilterBar, ShareDialog],
   templateUrl: './file-list.html',
   styleUrl: './file-list.scss'
 })
@@ -74,6 +75,7 @@ export class FileList {
   protected readonly renaming = signal<FileItem | null>(null);
   protected readonly moving = signal<FileItem | null>(null);
   protected readonly deleting = signal<FileItem | null>(null);
+  protected readonly sharing = signal<FileItem | null>(null);
   protected readonly busy = signal(false);
   protected readonly dialogError = signal<string | null>(null);
 
@@ -260,11 +262,13 @@ export class FileList {
   protected openRename(file: FileItem): void { this.closeDialogs(); this.renaming.set(file); }
   protected openMove(file: FileItem): void { this.closeDialogs(); this.moving.set(file); }
   protected openDelete(file: FileItem): void { this.closeDialogs(); this.deleting.set(file); }
+  protected openShare(file: FileItem): void { this.closeDialogs(); this.sharing.set(file); }
 
   protected closeDialogs(): void {
     this.renaming.set(null);
     this.moving.set(null);
     this.deleting.set(null);
+    this.sharing.set(null);
     this.busy.set(false);
     this.dialogError.set(null);
   }

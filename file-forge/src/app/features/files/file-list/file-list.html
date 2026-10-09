@@ -80,7 +80,7 @@
             <tr>
               <td class="name">
                 <span aria-hidden="true">{{ icon(file) }}</span>
-                <span class="name__text" [title]="file.name">{{ file.name }}</span>
+                <a class="name__text" [title]="file.name" [routerLink]="['/file', file.id]">{{ file.name }}</a>
               </td>
               <td><span class="badge">{{ file.extension | uppercase }}</span></td>
               <td class="num">{{ file.size | fileSize }}</td>
@@ -104,11 +104,11 @@
                 </button>
 
                 @if (file.ownerId === meId()) {
+                  <button type="button" class="icon-btn" title="Compartir" [attr.aria-label]="'Compartir ' + file.name" (click)="openShare(file)">👥</button>
                   <button type="button" class="icon-btn" title="Renombrar" [attr.aria-label]="'Renombrar ' + file.name" (click)="openRename(file)">✏️</button>
                   <button type="button" class="icon-btn" title="Mover" [attr.aria-label]="'Mover ' + file.name" (click)="openMove(file)">📂</button>
                   <button type="button" class="icon-btn" title="Eliminar" [attr.aria-label]="'Eliminar ' + file.name" (click)="openDelete(file)">🗑️</button>
                 }
-                <!-- Fase 13: abrir en visor -->
               </td>
             </tr>
           }
@@ -157,6 +157,15 @@
     [busy]="busy()"
     [error]="dialogError()"
     (confirmed)="confirmDelete()"
+    (cancelled)="closeDialogs()"
+  />
+}
+
+@if (sharing(); as file) {
+  <app-share-dialog
+    resourceType="file"
+    [resourceId]="file.id"
+    [resourceName]="file.name"
     (cancelled)="closeDialogs()"
   />
 }

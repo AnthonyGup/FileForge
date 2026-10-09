@@ -39,6 +39,7 @@
 
             @if (folder.ownerId === meId()) {
               <div class="folder-item__actions">
+                <button type="button" title="Compartir" [attr.aria-label]="'Compartir ' + folder.name" (click)="openShare(folder)">👥</button>
                 <button type="button" title="Renombrar" [attr.aria-label]="'Renombrar ' + folder.name" (click)="openRename(folder)">✏️</button>
                 <button type="button" title="Mover" [attr.aria-label]="'Mover ' + folder.name" (click)="openMove(folder)">📂</button>
                 <button type="button" title="Eliminar" [attr.aria-label]="'Eliminar ' + folder.name" (click)="openDelete(folder)">🗑️</button>
@@ -97,6 +98,15 @@
     [busy]="busy()"
     [error]="dialogError()"
     (confirmed)="confirmDelete()"
+    (cancelled)="closeDialogs()"
+  />
+}
+
+@if (sharing(); as folder) {
+  <app-share-dialog
+    resourceType="folder"
+    [resourceId]="folder.id"
+    [resourceName]="folder.name"
     (cancelled)="closeDialogs()"
   />
 }

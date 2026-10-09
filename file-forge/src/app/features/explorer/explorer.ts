@@ -10,6 +10,7 @@ import { Toast } from '@app/core/services/toast';
 import { Breadcrumbs } from '@app/shared/components/breadcrumbs/breadcrumbs';
 import { ConfirmDialog } from '@app/shared/components/confirm-dialog/confirm-dialog';
 import { MoveDialog } from '@app/shared/components/move-dialog/move-dialog';
+import { ShareDialog } from '@app/shared/components/share-dialog/share-dialog';
 import { FileList } from '@app/features/files/file-list/file-list';
 import { FolderNameDialog } from './folder-name-dialog/folder-name-dialog';
 
@@ -17,7 +18,7 @@ const ROOT: BreadcrumbItem = { id: null, name: 'Mis archivos' };
 
 @Component({
   selector: 'app-explorer',
-  imports: [DatePipe, RouterLink, Breadcrumbs, ConfirmDialog, FolderNameDialog, MoveDialog, FileList],
+  imports: [DatePipe, RouterLink, Breadcrumbs, ConfirmDialog, FolderNameDialog, MoveDialog, ShareDialog, FileList],
   templateUrl: './explorer.html',
   styleUrl: './explorer.scss'
 })
@@ -55,6 +56,7 @@ export class Explorer {
   protected readonly renaming = signal<Folder | null>(null);
   protected readonly moving = signal<Folder | null>(null);
   protected readonly deleting = signal<Folder | null>(null);
+  protected readonly sharing = signal<Folder | null>(null);
   protected readonly busy = signal(false);
   protected readonly dialogError = signal<string | null>(null);
 
@@ -95,12 +97,14 @@ export class Explorer {
   protected openRename(folder: Folder): void { this.closeDialogs(); this.renaming.set(folder); }
   protected openMove(folder: Folder): void { this.closeDialogs(); this.moving.set(folder); }
   protected openDelete(folder: Folder): void { this.closeDialogs(); this.deleting.set(folder); }
+  protected openShare(folder: Folder): void { this.closeDialogs(); this.sharing.set(folder); }
 
   protected closeDialogs(): void {
     this.creating.set(false);
     this.renaming.set(null);
     this.moving.set(null);
     this.deleting.set(null);
+    this.sharing.set(null);
     this.busy.set(false);
     this.dialogError.set(null);
   }

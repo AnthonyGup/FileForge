@@ -1,0 +1,91 @@
+<section class="viewer">
+  @if (loading()) {
+    <p class="viewer__state">Cargando archivo…</p>
+  } @else if (error()) {
+    <div class="viewer__state viewer__state--error">
+      <p>{{ error() }}</p>
+      <a class="btn" [routerLink]="backLink()">Volver al explorador</a>
+    </div>
+  } @else if (file(); as f) {
+    <header class="viewer__header">
+      <button type="button" class="btn" (click)="goBack()">← Volver</button>
+
+      <div class="viewer__meta">
+        <h2 class="viewer__title">
+          <span aria-hidden="true">{{ icon(f) }}</span>
+          <span class="viewer__name">{{ f.name }}</span>
+        </h2>
+        <p class="viewer__subtitle">
+          <span class="badge">{{ f.extension | uppercase }}</span>
+          {{ f.size | fileSize }}
+          <span aria-hidden="true">·</span>
+          Modificado {{ f.updatedAt | date: 'dd/MM/yyyy HH:mm' }}
+        </p>
+      </div>
+
+      <div class="viewer__actions">
+        <button
+          type="button"
+          class="icon-btn"
+          title="Descargar"
+          [attr.aria-label]="'Descargar ' + f.name"
+          [disabled]="downloading()"
+          (click)="download()"
+        >
+          {{ downloading() ? '⏳' : '⬇' }}
+        </button>
+
+        @if (mode() === 'view') {
+          <button type="button" class="btn btn--primary" (click)="startEdit()">✏️ Editar</button>
+        }
+      </div>
+    </header>
+
+    @if (saveError(); as message) {
+      <p class="form-alert" role="alert">{{ message }}</p>
+    }
+
+    @if (mode() === 'edit') {
+      <textarea
+        class="viewer__editor"
+        [value]="draft()"
+        (input)="onDraftInput($event)"
+        spellcheck="false"
+        aria-label="Contenido del archivo"
+      ></textarea>
+
+      <footer class="viewer__footer">
+        <span class="viewer__count" [class.viewer__count--limit]="byteCount() > maxSize">
+          {{ byteCount() | fileSize }} / {{ maxSize | fileSize }}
+        </span>
+        <div class="dialog-actions">
+          <button type="button" class="btn" (click)="cancelEdit()" [disabled]="saving()">Cancelar</button>
+          <button type="button" class="btn btn--primary" (click)="save()" [disabled]="saving() || !dirty()">
+            {{ saving() ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </footer>
+    } @else {
+      @if (content()) {
+        @if (f.extension === 'md') {
+          <article class="viewer__content markdown" [innerHTML]="content() | markdown"></article>
+        } @else {
+          <pre class="viewer__content viewer__content--text">{{ content() }}</pre>
+        }
+      } @else {
+        <p class="viewer__state">Este archivo está vacío.</p>
+      }
+    }
+  }
+</section>
+
+@if (discardIntent()) {
+  <app-confirm-dialog
+    title="Descartar cambios"
+    message="Tienes cambios sin guardar. ¿Seguro que quieres salir sin guardarlos?"
+    confirmLabel="Descartar"
+    [danger]="true"
+    (confirmed)="confirmDiscard()"
+    (cancelled)="cancelDiscard()"
+  />
+}
