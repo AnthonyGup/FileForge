@@ -1,0 +1,11 @@
+<dialog #dlg class="dialog" (cancel)="onCancel($event)" (click)="onBackdropClick($event)">
+  <div class="dialog__panel">
+    <header class="dialog__header">
+      <h2>{{ title() }}</h2>
+      <button type="button" (click)="closed.emit()" aria-label="Cerrar">✕</button>
+    </header>
+    <div class="dialog__body">
+      <ng-content />
+    </div>
+  </div>
+</dialog>

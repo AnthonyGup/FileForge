@@ -1,0 +1,21 @@
+<app-dialog [title]="title()" (closed)="cancelled.emit()">
+  <p>{{ message() }}</p>
+
+  @if (error()) {
+    <div class="form-alert" role="alert">{{ error() }}</div>
+  }
+
+  <div class="dialog-actions">
+    <button type="button" class="btn" (click)="cancelled.emit()">Cancelar</button>
+    <button
+      type="button"
+      class="btn"
+      [class.btn--danger]="danger()"
+      [class.btn--primary]="!danger()"
+      [disabled]="busy()"
+      (click)="confirmed.emit()"
+    >
+      {{ busy() ? 'Procesando...' : confirmLabel() }}
+    </button>
+  </div>
+</app-dialog>

@@ -1,0 +1,22 @@
+<div class="pagination">
+  <span class="pagination__info">Mostrando {{ from() }}–{{ to() }} de {{ total() }}</span>
+
+  <label class="pagination__size">
+    <span>Por página</span>
+    <select #sel (change)="pageSizeChange.emit(+sel.value)">
+      @for (size of pageSizeOptions(); track size) {
+        <option [value]="size" [selected]="size === pageSize()">{{ size }}</option>
+      }
+    </select>
+  </label>
+
+  <div class="pagination__nav">
+    <button type="button" class="btn" [disabled]="page() <= 1" (click)="pageChange.emit(page() - 1)">
+      ‹ Anterior
+    </button>
+    <span>Página {{ page() }} de {{ totalPages() }}</span>
+    <button type="button" class="btn" [disabled]="page() >= totalPages()" (click)="pageChange.emit(page() + 1)">
+      Siguiente ›
+    </button>
+  </div>
+</div>

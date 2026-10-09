@@ -1,0 +1,10 @@
+<nav class="breadcrumbs" aria-label="Ruta de navegación">
+  @for (item of items(); track item.id; let last = $last) {
+    @if (last) {
+      <span class="breadcrumbs__current" aria-current="page">{{ item.name }}</span>
+    } @else {
+      <a class="breadcrumbs__link" [routerLink]="link(item)">{{ item.name }}</a>
+      <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+    }
+  }
+</nav>

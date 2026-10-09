@@ -1,0 +1,17 @@
+.rename__row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  input { flex: 1; min-width: 0; }
+}
+
+.rename__suffix {
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+}
+
+.rename__hint { color: #64748b; }

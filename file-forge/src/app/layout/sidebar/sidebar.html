@@ -1,6 +1,6 @@
 <aside class="sidebar" [class.sidebar--open]="layout.sidebarOpen()">
   <nav>
-    @for (item of items; track item.route) {
+    @for (item of visibleItems(); track item.route) {
       <a
         class="sidebar__link"
         [routerLink]="item.route"

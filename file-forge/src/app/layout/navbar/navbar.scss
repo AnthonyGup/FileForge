@@ -40,6 +40,27 @@
   font-weight: 600;
 }
 
+.navbar__info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.navbar__role {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.navbar__logout {
+  border: 1px solid var(--color-border);
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+
+  &:hover { background: #f1f5f9; }
+}
+
 @media (max-width: 768px) {
-  .navbar__name { display: none; }
+  .navbar__info { display: none; }
 }

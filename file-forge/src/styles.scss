@@ -17,3 +17,79 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
 }
+
+/* ---------- Botones ---------- */
+.btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+
+  &:hover:not(:disabled) { background: #f1f5f9; }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+
+  &:hover:not(:disabled) { background: #1d4ed8; }
+}
+
+.btn--danger {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #fff;
+
+  &:hover:not(:disabled) { background: #b91c1c; }
+}
+
+/* ---------- Formularios ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+
+  input {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 1rem;
+
+    &:focus { outline: 2px solid var(--color-primary); }
+    &.ng-touched.ng-invalid { border-color: #dc2626; }
+  }
+}
+
+.field-error { color: #dc2626; font-size: 0.85rem; }
+
+.form-alert {
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 0.9rem;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

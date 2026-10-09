@@ -1,0 +1,135 @@
+.explorer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.explorer__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.explorer__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.explorer__back {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+
+  &:hover { text-decoration: underline; }
+}
+
+.explorer__title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.explorer__state {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #64748b;
+  background: #fff;
+  border: 1px dashed var(--color-border);
+  border-radius: 12px;
+}
+
+.explorer__state--error {
+  color: #991b1b;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.explorer__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+
+  a { color: var(--color-primary); }
+}
+
+.explorer__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.folder-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'icon name'
+    'icon date';
+  column-gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+  }
+}
+
+.folder-card__icon { grid-area: icon; font-size: 1.75rem; }
+
+.folder-card__name {
+  grid-area: name;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.folder-card__date {
+  grid-area: date;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.folder-item {
+  position: relative;
+
+  &:hover .folder-item__actions,
+  &:focus-within .folder-item__actions { opacity: 1; }
+}
+
+.folder-item__actions {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  display: flex;
+  gap: 0.15rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+
+  button {
+    padding: 0.2rem 0.35rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    &:hover { background: #f1f5f9; }
+  }
+}
+
+@media (hover: none) {
+  .folder-item__actions { opacity: 1; }
+}

@@ -1,1 +1,102 @@
-<h2>Explorador</h2>
+<section class="explorer">
+  <header class="explorer__header">
+    <app-breadcrumbs [items]="breadcrumb()" />
+
+    <div class="explorer__toolbar">
+      @if (parentLink(); as link) {
+        <a class="explorer__back" [routerLink]="link">← Subir un nivel</a>
+      }
+      @if (!loading() && !error() && canManageCurrent()) {
+        <button type="button" class="btn btn--primary" (click)="openCreate()">＋ Nueva carpeta</button>
+      }
+    </div>
+  </header>
+
+  @if (loading()) {
+    <p class="explorer__state">Cargando...</p>
+  } @else if (error()) {
+    <div class="explorer__state explorer__state--error" role="alert">
+      <p>{{ error() }}</p>
+      <div class="explorer__actions">
+        <button type="button" class="btn" (click)="reload()">Reintentar</button>
+        <a routerLink="/explorer">Ir a Mis archivos</a>
+      </div>
+    </div>
+  } @else {
+    <h2 class="explorer__title">Carpetas</h2>
+
+    @if (folders().length === 0) {
+      <p class="explorer__state">Esta ubicación no tiene carpetas.</p>
+    } @else {
+      <ul class="explorer__grid">
+        @for (folder of folders(); track folder.id) {
+          <li class="folder-item">
+            <a class="folder-card" [routerLink]="['/explorer', folder.id]">
+              <span class="folder-card__icon" aria-hidden="true">📁</span>
+              <span class="folder-card__name" [title]="folder.name">{{ folder.name }}</span>
+              <span class="folder-card__date">{{ folder.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+            </a>
+
+            @if (folder.ownerId === meId()) {
+              <div class="folder-item__actions">
+                <button type="button" title="Renombrar" [attr.aria-label]="'Renombrar ' + folder.name" (click)="openRename(folder)">✏️</button>
+                <button type="button" title="Mover" [attr.aria-label]="'Mover ' + folder.name" (click)="openMove(folder)">📂</button>
+                <button type="button" title="Eliminar" [attr.aria-label]="'Eliminar ' + folder.name" (click)="openDelete(folder)">🗑️</button>
+              </div>
+            }
+          </li>
+        }
+      </ul>
+    }
+
+    <app-file-list [folderId]="currentId()" [canUpload]="canManageCurrent()" />
+  }
+</section>
+
+@if (creating()) {
+  <app-folder-name-dialog
+    title="Nueva carpeta"
+    submitLabel="Crear"
+    [saving]="busy()"
+    [error]="dialogError()"
+    (submitted)="submitCreate($event)"
+    (cancelled)="closeDialogs()"
+  />
+}
+
+@if (renaming(); as folder) {
+  <app-folder-name-dialog
+    title="Renombrar carpeta"
+    [initialName]="folder.name"
+    [saving]="busy()"
+    [error]="dialogError()"
+    (submitted)="submitRename($event)"
+    (cancelled)="closeDialogs()"
+  />
+}
+
+@if (moving(); as folder) {
+  <app-move-dialog
+    title="Mover carpeta"
+    [itemName]="folder.name"
+    [currentLocationId]="folder.parentId"
+    [excludeFolderId]="folder.id"
+    [saving]="busy()"
+    [error]="dialogError()"
+    (selected)="submitMove($event)"
+    (cancelled)="closeDialogs()"
+  />
+}
+
+@if (deleting(); as folder) {
+  <app-confirm-dialog
+    title="Eliminar carpeta"
+    [message]="'La carpeta &quot;' + folder.name + '&quot; y todo su contenido se enviarán a la papelera. Podrás restaurarla después.'"
+    confirmLabel="Enviar a la papelera"
+    [danger]="true"
+    [busy]="busy()"
+    [error]="dialogError()"
+    (confirmed)="confirmDelete()"
+    (cancelled)="closeDialogs()"
+  />
+}

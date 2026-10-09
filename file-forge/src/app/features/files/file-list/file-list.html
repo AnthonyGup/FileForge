@@ -1,0 +1,162 @@
+<section
+  class="files"
+  [class.files--drag]="dragActive()"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+>
+  <header class="files__header">
+    <h2 class="files__title">Archivos</h2>
+
+    @if (canUploadNow()) {
+      <input
+        #picker
+        type="file"
+        hidden
+        multiple
+        accept=".txt,.md,text/plain,text/markdown"
+        (change)="onPick(picker)"
+      />
+      <button type="button" class="btn btn--primary" [disabled]="uploading()" (click)="picker.click()">
+        @if (progress(); as p) {
+          Subiendo {{ p.done }}/{{ p.total }}...
+        } @else {
+          ⬆ Subir archivo
+        }
+      </button>
+    }
+  </header>
+
+  <app-file-filter-bar (changed)="onFiltersChanged($event)" />
+
+  @if (dragActive()) {
+    <div class="files__drop" aria-hidden="true">Suelta los archivos para subirlos</div>
+  }
+
+  @if (error()) {
+    <div class="files__state files__state--error" role="alert">
+      <p>{{ error() }}</p>
+      <button type="button" class="btn" (click)="reload()">Reintentar</button>
+    </div>
+  } @else if (loading() && files().length === 0) {
+    <p class="files__state">Cargando...</p>
+  } @else if (!loading() && total() === 0) {
+    @if (hasActiveFilters()) {
+      <div class="files__state">
+        <p>No se encontraron archivos con esos filtros.</p>
+        <button type="button" class="btn" (click)="clearFilters()">Limpiar</button>
+      </div>
+    } @else if (scopeAll()) {
+      <p class="files__state">No hay archivos disponibles.</p>
+    } @else {
+      <p class="files__state">
+        Esta carpeta no tiene archivos.
+        @if (canUploadNow()) { Sube uno o arrástralo aquí. }
+      </p>
+    }
+  } @else {
+    <div class="files__wrap" [class.files__wrap--loading]="loading()">
+      <table class="files__table">
+        <thead>
+          <tr>
+            <th [attr.aria-sort]="ariaSort('name')">
+              <button type="button" (click)="toggleSort('name')">Nombre {{ sortIndicator('name') }}</button>
+            </th>
+            <th>Tipo</th>
+            <th [attr.aria-sort]="ariaSort('size')" class="num">
+              <button type="button" (click)="toggleSort('size')">Tamaño {{ sortIndicator('size') }}</button>
+            </th>
+            <th [attr.aria-sort]="ariaSort('createdAt')" class="hide-sm">
+              <button type="button" (click)="toggleSort('createdAt')">Creado {{ sortIndicator('createdAt') }}</button>
+            </th>
+            <th [attr.aria-sort]="ariaSort('updatedAt')">
+              <button type="button" (click)="toggleSort('updatedAt')">Modificado {{ sortIndicator('updatedAt') }}</button>
+            </th>
+            <th class="actions"><span class="sr-only">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (file of files(); track file.id) {
+            <tr>
+              <td class="name">
+                <span aria-hidden="true">{{ icon(file) }}</span>
+                <span class="name__text" [title]="file.name">{{ file.name }}</span>
+              </td>
+              <td><span class="badge">{{ file.extension | uppercase }}</span></td>
+              <td class="num">{{ file.size | fileSize }}</td>
+              <td class="hide-sm">{{ file.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ file.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td class="actions">
+                @if (scopeAll() && canOpenLocation(file)) {
+                  <a class="icon-btn" title="Abrir carpeta contenedora" [routerLink]="locationLink(file)"
+                     [attr.aria-label]="'Abrir la carpeta de ' + file.name">📍</a>
+                }
+
+                <button
+                  type="button"
+                  class="icon-btn"
+                  title="Descargar"
+                  [attr.aria-label]="'Descargar ' + file.name"
+                  [disabled]="downloadingId() !== null"
+                  (click)="download(file)"
+                >
+                  {{ downloadingId() === file.id ? '⏳' : '⬇' }}
+                </button>
+
+                @if (file.ownerId === meId()) {
+                  <button type="button" class="icon-btn" title="Renombrar" [attr.aria-label]="'Renombrar ' + file.name" (click)="openRename(file)">✏️</button>
+                  <button type="button" class="icon-btn" title="Mover" [attr.aria-label]="'Mover ' + file.name" (click)="openMove(file)">📂</button>
+                  <button type="button" class="icon-btn" title="Eliminar" [attr.aria-label]="'Eliminar ' + file.name" (click)="openDelete(file)">🗑️</button>
+                }
+                <!-- Fase 13: abrir en visor -->
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <app-pagination
+      [page]="page()"
+      [pageSize]="pageSize()"
+      [total]="total()"
+      (pageChange)="page.set($event)"
+      (pageSizeChange)="changePageSize($event)"
+    />
+  }
+</section>
+
+@if (renaming(); as file) {
+  <app-file-rename-dialog
+    [file]="file"
+    [saving]="busy()"
+    [error]="dialogError()"
+    (submitted)="submitRename($event)"
+    (cancelled)="closeDialogs()"
+  />
+}
+
+@if (moving(); as file) {
+  <app-move-dialog
+    title="Mover archivo"
+    [itemName]="file.name"
+    [currentLocationId]="file.folderId"
+    [saving]="busy()"
+    [error]="dialogError()"
+    (selected)="submitMove($event)"
+    (cancelled)="closeDialogs()"
+  />
+}
+
+@if (deleting(); as file) {
+  <app-confirm-dialog
+    title="Eliminar archivo"
+    [message]="'El archivo &quot;' + file.name + '&quot; se enviará a la papelera. Podrás restaurarlo después.'"
+    confirmLabel="Enviar a la papelera"
+    [danger]="true"
+    [busy]="busy()"
+    [error]="dialogError()"
+    (confirmed)="confirmDelete()"
+    (cancelled)="closeDialogs()"
+  />
+}

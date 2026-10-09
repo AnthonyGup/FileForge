@@ -1,19 +1,27 @@
 import { Routes } from '@angular/router';
+import { authGuard, guestGuard, roleGuard } from '@app/core/guards';
 
 export const routes: Routes = [
   {
     path: 'login',
+    canActivate: [guestGuard],
     loadComponent: () =>
       import('./features/auth/login/login').then(m => m.Login)
   },
   {
     path: '',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./layout/shell/shell').then(m => m.Shell),
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'explorer' },
       {
         path: 'explorer',
+        loadComponent: () =>
+          import('./features/explorer/explorer').then(m => m.Explorer)
+      },
+      {
+        path: 'explorer/:folderId',
         loadComponent: () =>
           import('./features/explorer/explorer').then(m => m.Explorer)
       },
@@ -44,6 +52,8 @@ export const routes: Routes = [
       },
       {
         path: 'admin',
+        canActivate: [roleGuard],
+        data: { roles: ['admin'] },
         loadComponent: () =>
           import('./features/admin/admin').then(m => m.Admin)
       }

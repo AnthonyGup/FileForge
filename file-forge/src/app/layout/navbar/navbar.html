@@ -1,14 +1,19 @@
 <header class="navbar">
-  <button class="navbar__toggle" (click)="layout.toggleSidebar()" aria-label="Menú">
-    ☰
-  </button>
+  <button class="navbar__toggle" (click)="layout.toggleSidebar()" aria-label="Menú">☰</button>
 
   <h1 class="navbar__title">Gestor Documental</h1>
 
   <div class="navbar__spacer"></div>
 
-  <div class="navbar__user">
-    <span class="navbar__avatar">{{ userName.charAt(0) }}</span>
-    <span class="navbar__name">{{ userName }}</span>
-  </div>
+  @if (auth.user(); as user) {
+    <div class="navbar__user">
+      <span class="navbar__avatar">{{ user.name.charAt(0) }}</span>
+      <div class="navbar__info">
+        <span class="navbar__name">{{ user.name }}</span>
+        <span class="navbar__role">{{ user.role === 'admin' ? 'Administrador' : 'Usuario' }}</span>
+      </div>
+    </div>
+
+    <button class="navbar__logout" (click)="auth.logout()">Cerrar sesión</button>
+  }
 </header>

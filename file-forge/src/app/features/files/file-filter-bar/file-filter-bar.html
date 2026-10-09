@@ -1,0 +1,43 @@
+<form class="filters" [formGroup]="form" role="search">
+  <label class="filters__search">
+    <span class="sr-only">Buscar por nombre</span>
+    <input type="search" formControlName="search" placeholder="🔍 Buscar por nombre..." autocomplete="off" />
+  </label>
+
+  <label class="filters__item">
+    <span>Tipo</span>
+    <select formControlName="extension">
+      <option value="">Todos</option>
+      <option value="txt">TXT</option>
+      <option value="md">MD</option>
+    </select>
+  </label>
+
+  <label class="filters__item">
+    <span>Creado desde</span>
+    <input type="date" formControlName="dateFrom" />
+  </label>
+
+  <label class="filters__item">
+    <span>Creado hasta</span>
+    <input type="date" formControlName="dateTo" />
+  </label>
+
+  <label class="filters__item">
+    <span>Buscar en</span>
+    <select formControlName="scope">
+      <option value="folder">Esta carpeta</option>
+      <option value="all">Todos (propios y compartidos)</option>
+    </select>
+  </label>
+
+  @if (active()) {
+    <button type="button" class="btn filters__clear" (click)="clear()">Limpiar</button>
+  }
+
+  @if (rangeInvalid()) {
+    <small class="field-error filters__error" role="alert">
+      La fecha inicial no puede ser posterior a la final
+    </small>
+  }
+</form>

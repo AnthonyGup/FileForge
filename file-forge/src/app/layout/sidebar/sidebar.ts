@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Layout } from '../../core/services/layout';
+import { Layout } from '@app/core/services/layout';
+import { Auth } from '@app/core/services/auth';
 
 interface MenuItem {
   label: string;
@@ -17,6 +18,7 @@ interface MenuItem {
 })
 export class Sidebar {
   protected readonly layout = inject(Layout);
+  private readonly auth = inject(Auth);
 
   protected readonly items: MenuItem[] = [
     { label: 'Mis archivos', icon: '📁', route: '/explorer' },
@@ -27,4 +29,8 @@ export class Sidebar {
     { label: 'Reportes', icon: '📊', route: '/reports' },
     { label: 'Administración', icon: '⚙️', route: '/admin', adminOnly: true },
   ];
+
+  protected readonly visibleItems = computed(() =>
+    this.items.filter(item => !item.adminOnly || this.auth.isAdmin())
+  );
 }

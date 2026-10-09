@@ -1,0 +1,52 @@
+<app-dialog [title]="title()" (closed)="cancelled.emit()">
+  <p>Mover <strong>{{ itemName() }}</strong> a:</p>
+
+  <nav class="move__crumbs" aria-label="Ubicación destino">
+    @for (c of breadcrumb(); track c.id; let last = $last) {
+      @if (last) {
+        <strong>{{ c.name }}</strong>
+      } @else {
+        <button type="button" (click)="go(c.id)">{{ c.name }}</button>
+        <span aria-hidden="true">/</span>
+      }
+    }
+  </nav>
+
+  <div class="move__list">
+    @if (loading()) {
+      <p class="move__empty">Cargando...</p>
+    } @else if (loadError()) {
+      <p class="move__empty move__empty--error">{{ loadError() }}</p>
+    } @else if (folders().length === 0) {
+      <p class="move__empty">No hay subcarpetas en esta ubicación.</p>
+    } @else {
+      <ul>
+        @for (f of folders(); track f.id) {
+          <li>
+            <button type="button" (click)="go(f.id)">📁 {{ f.name }}</button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  @if (isSameLocation()) {
+    <small class="move__hint">El elemento ya se encuentra en esta ubicación.</small>
+  }
+
+  @if (error()) {
+    <div class="form-alert" role="alert">{{ error() }}</div>
+  }
+
+  <div class="dialog-actions">
+    <button type="button" class="btn" (click)="cancelled.emit()">Cancelar</button>
+    <button
+      type="button"
+      class="btn btn--primary"
+      [disabled]="saving() || loading() || isSameLocation()"
+      (click)="selected.emit(location())"
+    >
+      {{ saving() ? 'Moviendo...' : 'Mover aquí' }}
+    </button>
+  </div>
+</app-dialog>

@@ -1,0 +1,36 @@
+<app-dialog [title]="title()" (closed)="cancelled.emit()">
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <label class="field">
+      <span>Nombre</span>
+      <input
+        type="text"
+        formControlName="name"
+        maxlength="100"
+        autocomplete="off"
+        autofocus
+        (focus)="$any($event.target).select()"
+      />
+    </label>
+
+    @if (form.controls.name.touched && form.controls.name.invalid) {
+      <small class="field-error">
+        @if (form.controls.name.hasError('required') || form.controls.name.hasError('blank')) {
+          El nombre es obligatorio
+        } @else {
+          El nombre no puede contener / ni \
+        }
+      </small>
+    }
+
+    @if (error()) {
+      <div class="form-alert" role="alert">{{ error() }}</div>
+    }
+
+    <div class="dialog-actions">
+      <button type="button" class="btn" (click)="cancelled.emit()">Cancelar</button>
+      <button type="submit" class="btn btn--primary" [disabled]="saving()">
+        {{ saving() ? 'Guardando...' : submitLabel() }}
+      </button>
+    </div>
+  </form>
+</app-dialog>

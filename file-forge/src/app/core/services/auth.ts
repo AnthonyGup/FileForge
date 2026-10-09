@@ -1,0 +1,52 @@
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { LoginRequest, User } from '@app/core/models';
+import { AuthApi } from '@app/core/api';
+
+const TOKEN_KEY = 'token';
+const USER_KEY = 'user';
+
+@Injectable({ providedIn: 'root' })
+export class Auth {
+  private readonly api = inject(AuthApi);
+  private readonly router = inject(Router);
+
+  private readonly _token = signal<string | null>(localStorage.getItem(TOKEN_KEY));
+  private readonly _user = signal<User | null>(this.readStoredUser());
+
+  readonly token = this._token.asReadonly();
+  readonly user = this._user.asReadonly();
+  readonly isLoggedIn = computed(() => this._token() !== null && this._user() !== null);
+  readonly isAdmin = computed(() => this._user()?.role === 'admin');
+
+  login(req: LoginRequest): Observable<User> {
+    return this.api.login(req).pipe(
+      map(res => {
+        localStorage.setItem(TOKEN_KEY, res.token);
+        localStorage.setItem(USER_KEY, JSON.stringify(res.user));
+        this._token.set(res.token);
+        this._user.set(res.user);
+        return res.user;
+      })
+    );
+  }
+
+  logout(): void {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+    this._token.set(null);
+    this._user.set(null);
+    this.router.navigate(['/login']);
+  }
+
+  private readStoredUser(): User | null {
+    try {
+      const raw = localStorage.getItem(USER_KEY);
+      return raw ? (JSON.parse(raw) as User) : null;
+    } catch {
+      return null;
+    }
+  }
+}

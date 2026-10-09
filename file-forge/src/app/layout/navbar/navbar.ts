@@ -1,15 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { Layout } from '../../core/services/layout';
+import { Layout } from '@app/core/services/layout';
+import { Auth } from '@app/core/services/auth';
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.scss',
+  styleUrl: './navbar.scss'
 })
 export class Navbar {
   protected readonly layout = inject(Layout);
-
-  // Temporal: se reemplaza con el usuario real en la Fase 5
-  protected readonly userName = 'Usuario Demo';
+  protected readonly auth = inject(Auth);
 }

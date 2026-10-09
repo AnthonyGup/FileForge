@@ -1,1 +1,51 @@
-<h2>Iniciar sesión</h2>
+<main class="login">
+  <form class="login__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <h1 class="login__title">Gestor Documental</h1>
+    <p class="login__subtitle">Inicia sesión para continuar</p>
+
+    @if (error()) {
+      <div class="login__alert" role="alert">{{ error() }}</div>
+    }
+
+    <label class="login__field">
+      <span>Correo electrónico</span>
+      <input type="email" formControlName="email" autocomplete="username" placeholder="correo@empresa.com" />
+      @if (form.controls.email.touched && form.controls.email.invalid) {
+        <small class="login__error">
+          @if (form.controls.email.hasError('required')) { El correo es obligatorio }
+          @else { Ingresa un correo válido }
+        </small>
+      }
+    </label>
+
+    <label class="login__field">
+      <span>Contraseña</span>
+      <div class="login__password">
+        <input
+          [type]="showPassword() ? 'text' : 'password'"
+          formControlName="password"
+          autocomplete="current-password"
+        />
+        <button type="button" (click)="toggleShowPassword()">
+          {{ showPassword() ? 'Ocultar' : 'Mostrar' }}
+        </button>
+      </div>
+      @if (form.controls.password.touched && form.controls.password.invalid) {
+        <small class="login__error">La contraseña es obligatoria</small>
+      }
+    </label>
+
+    <button class="login__submit" type="submit" [disabled]="loading()">
+      {{ loading() ? 'Ingresando...' : 'Iniciar sesión' }}
+    </button>
+
+    <div class="login__demo">
+      <span>Acceso rápido (demo):</span>
+      <div>
+        @for (u of demoUsers; track u.email) {
+          <button type="button" (click)="fillDemo(u.email)">{{ u.label }}</button>
+        }
+      </div>
+    </div>
+  </form>
+</main>
