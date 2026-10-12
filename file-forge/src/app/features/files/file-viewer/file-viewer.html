@@ -76,6 +76,10 @@
         <p class="viewer__state">Este archivo está vacío.</p>
       }
     }
+
+    @if (mode() === 'view') {
+      <app-file-comments [fileId]="fileId()" [canComment]="f.ownerId === meId()" />
+    }
   }
 </section>
 

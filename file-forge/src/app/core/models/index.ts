@@ -6,3 +6,4 @@ export * from './share.model';
 export * from './comment.model';
 export * from './activity.model';
 export * from './trash.model';
+export * from './report.model';

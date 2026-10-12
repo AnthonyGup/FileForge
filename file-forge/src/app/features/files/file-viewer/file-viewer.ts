@@ -4,11 +4,13 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
 import { ApiError, FileItem } from '@app/core/models';
 import { FileApi } from '@app/core/api';
+import { Auth } from '@app/core/services/auth';
 import { FileTransfer, MAX_FILE_SIZE } from '@app/core/services/file-transfer';
 import { Toast } from '@app/core/services/toast';
 import { ConfirmDialog } from '@app/shared/components/confirm-dialog/confirm-dialog';
 import { FileSizePipe } from '@app/shared/pipes/file-size-pipe';
 import { MarkdownPipe } from '@app/shared/pipes/markdown-pipe';
+import { FileComments } from '../file-comments/file-comments';
 import { catchError, forkJoin, of, switchMap, tap } from 'rxjs';
 
 type Mode = 'view' | 'edit';
@@ -16,7 +18,7 @@ type DiscardIntent = 'cancel' | 'leave' | null;
 
 @Component({
   selector: 'app-file-viewer',
-  imports: [DatePipe, UpperCasePipe, FileSizePipe, MarkdownPipe, ConfirmDialog, RouterLink],
+  imports: [DatePipe, UpperCasePipe, FileSizePipe, MarkdownPipe, ConfirmDialog, RouterLink, FileComments],
   templateUrl: './file-viewer.html',
   styleUrl: './file-viewer.scss'
 })
@@ -25,6 +27,7 @@ export class FileViewer {
   private readonly transfer = inject(FileTransfer);
   private readonly toast = inject(Toast);
   private readonly router = inject(Router);
+  private readonly auth = inject(Auth);
 
   readonly fileId = input.required<string>();
 
@@ -42,6 +45,7 @@ export class FileViewer {
 
   protected readonly maxSize = MAX_FILE_SIZE;
   protected readonly dirty = computed(() => this.draft() !== this.content());
+  protected readonly meId = computed(() => this.auth.user()?.id ?? null);
   protected readonly byteCount = computed(() => new TextEncoder().encode(this.draft()).length);
   protected readonly backLink = computed<string[]>(() => {
     const folderId = this.file()?.folderId;

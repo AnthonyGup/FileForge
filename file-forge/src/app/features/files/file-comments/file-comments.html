@@ -1,0 +1,58 @@
+<section class="comments">
+  <header class="comments__header">
+    <h3 class="comments__title">
+      Comentarios
+      @if (!loading() && !error()) {
+        <span class="comments__count">{{ comments().length }}</span>
+      }
+    </h3>
+  </header>
+
+  @if (canComment()) {
+    <div class="comments__form">
+      <textarea
+        class="comments__input"
+        [value]="text()"
+        (input)="onInput($event)"
+        placeholder="Escribe un comentario…"
+        aria-label="Nuevo comentario"
+        [disabled]="sending()"
+      ></textarea>
+      @if (sendError(); as message) {
+        <p class="form-alert" role="alert">{{ message }}</p>
+      }
+      <div class="comments__form-actions">
+        <button
+          type="button"
+          class="btn btn--primary"
+          [disabled]="sending() || !text().trim()"
+          (click)="submit()"
+        >
+          {{ sending() ? 'Enviando…' : 'Comentar' }}
+        </button>
+      </div>
+    </div>
+  } @else {
+    <p class="comments__readonly">Solo el propietario puede comentar.</p>
+  }
+
+  @if (loading()) {
+    <p class="comments__state">Cargando comentarios…</p>
+  } @else if (error()) {
+    <p class="comments__state comments__state--error" role="alert">{{ error() }}</p>
+  } @else if (comments().length === 0) {
+    <p class="comments__state">Todavía no hay comentarios.</p>
+  } @else {
+    <ul class="comments__list">
+      @for (comment of comments(); track comment.id) {
+        <li class="comment">
+          <div class="comment__head">
+            <span class="comment__author">{{ comment.author.name }}</span>
+            <span class="comment__date">{{ comment.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+          </div>
+          <p class="comment__text">{{ comment.text }}</p>
+        </li>
+      }
+    </ul>
+  }
+</section>

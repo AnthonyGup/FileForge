@@ -1,1 +1,126 @@
-<h2>Actividad</h2>
+<section class="activity">
+  <header class="activity__header">
+    <div>
+      <h2 class="activity__title">Actividad</h2>
+      <p class="activity__subtitle">Historial de acciones realizadas en la plataforma.</p>
+    </div>
+    <button type="button" class="btn" [disabled]="loading()" (click)="reload()">Actualizar</button>
+  </header>
+
+  <div class="activity__filters">
+    <div class="activity__filter-group">
+      <label for="filter-action">Acción</label>
+      <select
+        id="filter-action"
+        class="field"
+        [value]="filters().action || ''"
+        (change)="onActionChange($event)"
+      >
+        <option value="">Todas</option>
+        <option value="login">Inicio de sesión</option>
+        <option value="upload">Subida</option>
+        <option value="download">Descarga</option>
+        <option value="rename">Renombrado</option>
+        <option value="move">Movimiento</option>
+        <option value="edit">Edición</option>
+        <option value="delete">Envío a papelera</option>
+        <option value="restore">Restauración</option>
+        <option value="delete_permanent">Eliminación definitiva</option>
+        <option value="create_folder">Carpeta creada</option>
+        <option value="share">Compartido</option>
+        <option value="update_share">Permiso actualizado</option>
+        <option value="revoke_share">Acceso retirado</option>
+        <option value="comment">Comentario</option>
+      </select>
+    </div>
+
+    <div class="activity__filter-group">
+      <label for="filter-from">Desde</label>
+      <input
+        id="filter-from"
+        type="date"
+        class="field"
+        [value]="filters().dateFrom ? filters().dateFrom!.slice(0, 10) : ''"
+        (change)="onDateFromChange($event)"
+      />
+    </div>
+
+    <div class="activity__filter-group">
+      <label for="filter-to">Hasta</label>
+      <input
+        id="filter-to"
+        type="date"
+        class="field"
+        [value]="filters().dateTo ? filters().dateTo!.slice(0, 10) : ''"
+        (change)="onDateToChange($event)"
+      />
+    </div>
+
+    <div class="activity__filter-group activity__filter-group--actions">
+      <button type="button" class="btn" (click)="clearFilters()" [disabled]="!hasActiveFilters()">Limpiar</button>
+    </div>
+  </div>
+
+  @if (error()) {
+    <div class="activity__state activity__state--error" role="alert">
+      <p>{{ error() }}</p>
+      <button type="button" class="btn" (click)="reload()">Reintentar</button>
+    </div>
+  } @else if (loading() && items().length === 0) {
+    <p class="activity__state">Cargando...</p>
+  } @else if (empty()) {
+    <p class="activity__state">No hay actividad registrada con esos filtros.</p>
+  } @else {
+    <div class="activity__wrap" [class.activity__wrap--loading]="loading()">
+      <table class="activity__table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th>Acción</th>
+            <th>Recurso</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of items(); track item.id) {
+            <tr>
+              <td>{{ item.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ item.user.name }}</td>
+              <td>
+                <span class="activity__action">
+                  <span aria-hidden="true">{{ actionIcon(item.action) }}</span>
+                  {{ actionLabel(item.action) }}
+                </span>
+              </td>
+              <td>
+                @if (item.resource) {
+                  <a class="activity__resource" [routerLink]="resourceLink(item)">{{ item.resource.name }}</a>
+                  <span class="activity__resource-type">({{ item.resource.type === 'folder' ? 'carpeta' : 'archivo' }})</span>
+                } @else {
+                  <span class="activity__resource-empty">—</span>
+                }
+              </td>
+              <td class="activity__details">
+                @if (detailsText(item); as text) {
+                  <span>{{ text }}</span>
+                } @else {
+                  <span class="activity__details-empty">—</span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <app-pagination
+      [page]="page()"
+      [pageSize]="pageSize()"
+      [total]="total()"
+      [pageSizeOptions]="pageSizeOptions"
+      (pageChange)="onPageChange($event)"
+      (pageSizeChange)="onPageSizeChange($event)"
+    />
+  }
+</section>

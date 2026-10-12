@@ -19,6 +19,7 @@ describe('FileViewer', () => {
   beforeEach(async () => {
     localStorage.clear();
     localStorage.setItem('token', 'mock-token-u2');
+    localStorage.setItem('user', JSON.stringify({ id: 'u2', name: 'Ana López', email: 'ana@demo.com', role: 'user', active: true }));
     await TestBed.configureTestingModule({
       imports: [FileViewer],
       providers: [provideRouter([]), provideApi()],
@@ -84,5 +85,24 @@ describe('FileViewer', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelector('.form-alert')).toBeTruthy();
+  });
+
+  it('muestra los comentarios y el compositor en un archivo propio', async () => {
+    const fixture = await create('a3');
+    await wait(400);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.comments__list')?.textContent)
+      .toContain('Revisé el informe, todo en orden.');
+    expect(fixture.nativeElement.querySelector('.comments__input')).toBeTruthy();
+  });
+
+  it('oculta el compositor de comentarios en un archivo ajeno', async () => {
+    const fixture = await create('b2');
+    await wait(400);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.comments__input')).toBeFalsy();
+    expect(fixture.nativeElement.querySelector('.comments__readonly')).toBeTruthy();
   });
 });

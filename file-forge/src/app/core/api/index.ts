@@ -6,4 +6,5 @@ export * from './share.api';
 export * from './comment.api';
 export * from './trash.api';
 export * from './activity.api';
+export * from './report.api';
 export * from './api.providers';

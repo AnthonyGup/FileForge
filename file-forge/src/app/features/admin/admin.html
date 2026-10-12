@@ -1,1 +1,124 @@
-<h2>Administración</h2>
+<section class="admin">
+  <header class="admin__header">
+    <div>
+      <h2 class="admin__title">Administración</h2>
+      <p class="admin__subtitle">Gestiona los usuarios del sistema y consulta la información global.</p>
+    </div>
+    <button type="button" class="btn" [disabled]="loading()" (click)="reload()">Actualizar</button>
+  </header>
+
+  @if (error()) {
+    <div class="admin__state admin__state--error">
+      <p>{{ error() }}</p>
+      <button type="button" class="btn" (click)="reload()">Reintentar</button>
+    </div>
+  } @else if (loading()) {
+    <p class="admin__state">Cargando información…</p>
+  } @else {
+    <div class="admin__cards">
+      <div class="stat">
+        <span class="stat__value">{{ totalUsers() }}</span>
+        <span class="stat__label">Usuarios</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">{{ activeUsers() }}</span>
+        <span class="stat__label">Activos</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">{{ adminCount() }}</span>
+        <span class="stat__label">Administradores</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">{{ totalStorage() | fileSize }}</span>
+        <span class="stat__label">Almacenamiento total</span>
+      </div>
+    </div>
+
+    <form class="admin__new" (submit)="$event.preventDefault(); create()">
+      <h3 class="admin__section">Nuevo usuario</h3>
+      <div class="admin__new-grid">
+        <label class="field">
+          <span>Nombre</span>
+          <input type="text" [value]="newName()" (input)="onName($event)" placeholder="Nombre completo" />
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" [value]="newEmail()" (input)="onEmail($event)" placeholder="usuario@demo.com" />
+        </label>
+        <label class="field">
+          <span>Contraseña</span>
+          <input type="password" [value]="newPassword()" (input)="onPassword($event)" placeholder="Contraseña" />
+        </label>
+        <label class="field">
+          <span>Rol</span>
+          <select [value]="newRole()" (change)="onNewRole($event)">
+            <option value="user">Usuario</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </label>
+      </div>
+      @if (formError()) {
+        <p class="form-alert" role="alert">{{ formError() }}</p>
+      }
+      <div class="admin__new-actions">
+        <button type="submit" class="btn btn--primary" [disabled]="creating()">
+          {{ creating() ? 'Creando…' : 'Crear usuario' }}
+        </button>
+      </div>
+    </form>
+
+    @if (users().length === 0) {
+      <p class="admin__state">No hay usuarios registrados.</p>
+    } @else {
+      <div class="admin__wrap">
+        <table class="admin__table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Estado</th>
+              <th class="num">Almacenamiento</th>
+              <th>Último acceso</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (user of users(); track user.id) {
+              <tr [class.admin__row--self]="user.id === meId()">
+                <td class="admin__name">
+                  {{ user.name }}
+                  @if (user.id === meId()) { <span class="admin__you">(tú)</span> }
+                </td>
+                <td>{{ user.email }}</td>
+                <td>
+                  <select
+                    class="admin__select"
+                    [value]="user.role"
+                    [disabled]="user.id === meId() || busyId() === user.id"
+                    (change)="changeRole(user, $any($event.target).value)"
+                  >
+                    <option value="user">Usuario</option>
+                    <option value="admin">Administrador</option>
+                  </select>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="status"
+                    [class.status--off]="!user.active"
+                    [disabled]="user.id === meId() || busyId() === user.id"
+                    (click)="toggleActive(user)"
+                  >
+                    {{ user.active ? 'Activo' : 'Inactivo' }}
+                  </button>
+                </td>
+                <td class="num">{{ user.storageUsed | fileSize }}</td>
+                <td>{{ user.lastLoginAt ? (user.lastLoginAt | date: 'dd/MM/yyyy HH:mm') : '—' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  }
+</section>

@@ -1,1 +1,79 @@
-<h2>Papelera</h2>
+<section class="trash">
+  <header class="trash__header">
+    <div>
+      <h2 class="trash__title">Papelera</h2>
+      <p class="trash__subtitle">Los elementos permanecen aquí hasta que los restaures o los elimines definitivamente.</p>
+    </div>
+    <button type="button" class="btn" [disabled]="loading()" (click)="reload()">Actualizar</button>
+  </header>
+
+  @if (error()) {
+    <div class="trash__state trash__state--error" role="alert">
+      <p>{{ error() }}</p>
+      <button type="button" class="btn" (click)="reload()">Reintentar</button>
+    </div>
+  } @else if (loading() && items().length === 0) {
+    <p class="trash__state">Cargando...</p>
+  } @else if (empty()) {
+    <p class="trash__state">La papelera está vacía.</p>
+  } @else {
+    <div class="trash__wrap" [class.trash__wrap--loading]="loading()">
+      <table class="trash__table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th class="num">Tamaño</th>
+            <th>Eliminado</th>
+            <th class="actions"><span class="sr-only">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of items(); track item.type + ':' + item.id) {
+            <tr>
+              <td class="name">
+                <span aria-hidden="true">{{ icon(item) }}</span>
+                <span class="name__text" [title]="item.name">{{ item.name }}</span>
+              </td>
+              <td>{{ item.type === 'folder' ? 'Carpeta' : 'Archivo' }}</td>
+              <td class="num">{{ item.size ? (item.size | fileSize) : '—' }}</td>
+              <td>{{ item.deletedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td class="actions">
+                <button
+                  type="button"
+                  class="icon-btn"
+                  title="Restaurar"
+                  [attr.aria-label]="'Restaurar ' + item.name"
+                  [disabled]="restoringId() !== null"
+                  (click)="restore(item)"
+                >
+                  {{ restoringId() === item.id ? '⏳' : '↩' }}
+                </button>
+                <button
+                  type="button"
+                  class="icon-btn"
+                  title="Eliminar definitivamente"
+                  [attr.aria-label]="'Eliminar definitivamente ' + item.name"
+                  (click)="askDelete(item)"
+                >🗑️</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>
+
+@if (deleting(); as item) {
+  <app-confirm-dialog
+    title="Eliminar definitivamente"
+    [message]="'El ' + (item.type === 'folder' ? 'carpeta' : 'archivo') + ' &quot;' + item.name + '&quot; se eliminará para siempre. Esta acción no se puede deshacer.'"
+    confirmLabel="Eliminar definitivamente"
+    [danger]="true"
+    [busy]="busy()"
+    [error]="dialogError()"
+    (confirmed)="confirmDelete()"
+    (cancelled)="closeDialog()"
+  />
+}

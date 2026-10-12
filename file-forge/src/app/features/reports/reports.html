@@ -1,1 +1,96 @@
-<h2>Reportes</h2>
+<section class="reports">
+  <header class="reports__header">
+    <div>
+      <h2 class="reports__title">Reportes</h2>
+      <p class="reports__subtitle">Estadísticas agregadas sobre tus documentos y tu actividad.</p>
+    </div>
+  </header>
+
+  <div class="reports__tabs" role="tablist" aria-label="Tipo de reporte">
+    @for (tab of tabs; track tab.kind) {
+      <button
+        type="button"
+        role="tab"
+        class="reports__tab"
+        [class.reports__tab--active]="report() === tab.kind"
+        [attr.aria-selected]="report() === tab.kind"
+        (click)="setReport(tab.kind)"
+      >
+        {{ tab.label }}
+      </button>
+    }
+  </div>
+
+  <form class="reports__filters" (submit)="$event.preventDefault(); applyFilters()">
+    <div class="reports__filter-group">
+      <label for="report-from">Desde</label>
+      <input id="report-from" type="date" class="field" [value]="from()" (change)="onFromChange($event)" />
+    </div>
+
+    <div class="reports__filter-group">
+      <label for="report-to">Hasta</label>
+      <input id="report-to" type="date" class="field" [value]="to()" (change)="onToChange($event)" />
+    </div>
+
+    <div class="reports__filter-actions">
+      <button type="submit" class="btn btn--primary">Aplicar</button>
+      <button type="button" class="btn" [disabled]="!hasFilters()" (click)="clearFilters()">Limpiar</button>
+    </div>
+  </form>
+
+  @if (dateError()) {
+    <p class="reports__date-error" role="alert">{{ dateError() }}</p>
+  }
+
+  @if (error()) {
+    <div class="reports__state reports__state--error">
+      <p>{{ error() }}</p>
+    </div>
+  } @else if (loading()) {
+    <p class="reports__state">Cargando reporte…</p>
+  } @else if (empty()) {
+    <p class="reports__state">No hay datos que coincidan con los filtros.</p>
+  } @else {
+    <div class="reports__wrap">
+      <table class="reports__table">
+        <thead>
+          <tr>
+            <th>{{ activeTab().category }}</th>
+            <th class="reports__num">Cantidad</th>
+            @if (showSize()) {
+              <th class="reports__num">Tamaño</th>
+            }
+            <th>Distribución</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of rows(); track row.key) {
+            <tr>
+              <td class="reports__type">{{ row.label }}</td>
+              <td class="reports__num">{{ row.count }}</td>
+              @if (showSize()) {
+                <td class="reports__num">{{ row.size | fileSize }}</td>
+              }
+              <td>
+                <div class="reports__bar" role="img" [attr.aria-label]="percent(row) + '%'">
+                  <span class="reports__bar-fill" [style.width]="barWidth(row)"></span>
+                  <span class="reports__bar-label">{{ percent(row) }}%</span>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total</td>
+            <td class="reports__num">{{ totalRows() }}</td>
+            @if (showSize()) {
+              <td class="reports__num">{{ rowSizeTotal() | fileSize }}</td>
+            }
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  }
+</section>

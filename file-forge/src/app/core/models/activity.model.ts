@@ -42,3 +42,21 @@ export interface ActivityFilters {
   page?: number;
   pageSize?: number;
 }
+
+// Etiquetas legibles de las acciones (compartidas por la vista de actividad y los reportes).
+export const ACTIVITY_LABELS: Record<ActivityAction, string> = {
+  login: 'Inicio de sesión',
+  upload: 'Subida',
+  download: 'Descarga',
+  rename: 'Renombrado',
+  move: 'Movimiento',
+  edit: 'Edición',
+  delete: 'Envío a papelera',
+  restore: 'Restauración',
+  delete_permanent: 'Eliminación definitiva',
+  create_folder: 'Carpeta creada',
+  share: 'Compartido',
+  update_share: 'Permiso actualizado',
+  revoke_share: 'Acceso retirado',
+  comment: 'Comentario',
+};
