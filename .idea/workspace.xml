@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6ac2ab8-e4c7-4284-9ef6-8615e4e9af6c" name="Changes" comment="feat: layout con navbar, sidebar y shell">
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/config/db.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -12,66 +13,73 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.4059429440269193" />
-      <entry key="MS500" value="3.903237474730191" />
-      <entry key="S2" value="6.920117106753085" />
-      <entry key="S5" value="8.968653902790482" />
-      <entry key="S10" value="10.264010917403471" />
-      <entry key="S30" value="16.820230496200004" />
-      <entry key="S60" value="41.29341637559873" />
-      <entry key="M2" value="96.73114272775007" />
-      <entry key="M5" value="214.10756717584619" />
-      <entry key="M10" value="312.105939049661" />
-      <entry key="M15" value="365.10398278652946" />
-      <entry key="M30" value="442.5536019273832" />
-      <entry key="H1" value="498.31838371660433" />
-      <entry key="H2" value="533.0668279993597" />
-      <entry key="H4" value="552.6667520151948" />
-      <entry key="D1" value="570.3151095266993" />
-      <entry key="W1" value="573.47029450212" />
+      <entry key="MS100" value="1.0000000000000155" />
+      <entry key="MS500" value="1.0018055205001677" />
+      <entry key="S2" value="1.3864136001561047" />
+      <entry key="S5" value="2.986882269314338" />
+      <entry key="S10" value="5.680221323230138" />
+      <entry key="S30" value="15.227725073651198" />
+      <entry key="S60" value="35.15141033324064" />
+      <entry key="M2" value="85.62290762858873" />
+      <entry key="M5" value="204.9161131421019" />
+      <entry key="M10" value="309.37829083473105" />
+      <entry key="M15" value="366.3985000950726" />
+      <entry key="M30" value="449.58032687750426" />
+      <entry key="H1" value="509.2495505131673" />
+      <entry key="H2" value="546.3512323790902" />
+      <entry key="H4" value="567.2578843009873" />
+      <entry key="D1" value="586.0726363536422" />
+      <entry key="W1" value="589.435459820217" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="3.604542501677068E-86" />
-      <entry key="S2" value="4.357353164543584E-22" />
-      <entry key="S5" value="2.8957358423535144E-9" />
-      <entry key="S10" value="5.977874936783534E-5" />
-      <entry key="S30" value="0.056214883488272305" />
-      <entry key="S60" value="0.3408524692850379" />
-      <entry key="M2" value="1.0018506060325256" />
-      <entry key="M5" value="2.693180018783745" />
-      <entry key="M10" value="5.210790323502085" />
-      <entry key="M15" value="7.493634554916941" />
-      <entry key="M30" value="12.072054734838149" />
-      <entry key="H1" value="16.050841265522347" />
-      <entry key="H2" value="18.72197726161826" />
-      <entry key="H4" value="20.276456429682703" />
-      <entry key="D1" value="21.700181088885756" />
-      <entry key="W1" value="21.95684976005761" />
+      <entry key="MS100" value="2.580200756372788E-35" />
+      <entry key="MS500" value="1.2087338921904908E-7" />
+      <entry key="S2" value="0.018645870984870652" />
+      <entry key="S5" value="0.20334479953506157" />
+      <entry key="S10" value="0.4509392719712005" />
+      <entry key="S30" value="0.7835962577931699" />
+      <entry key="S60" value="1.0617800708918883" />
+      <entry key="M2" value="1.6760311460464588" />
+      <entry key="M5" value="3.3599339910129964" />
+      <entry key="M10" value="5.891578447490595" />
+      <entry key="M15" value="8.188477917702475" />
+      <entry key="M30" value="12.826528766955072" />
+      <entry key="H1" value="16.887533902935573" />
+      <entry key="H2" value="19.626681334773856" />
+      <entry key="H4" value="21.224833701801472" />
+      <entry key="D1" value="22.690970055218358" />
+      <entry key="W1" value="22.95551825193824" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.3683194400942498" />
-      <entry key="MS500" value="3.8831424550828837" />
-      <entry key="S2" value="6.911213000672791" />
-      <entry key="S5" value="8.964060450819595" />
-      <entry key="S10" value="10.26144470063401" />
-      <entry key="S30" value="16.871890162425906" />
-      <entry key="S60" value="41.62083510076024" />
-      <entry key="M2" value="97.71057131559596" />
-      <entry key="M5" value="216.77201292606009" />
-      <entry key="M10" value="317.28838628844306" />
-      <entry key="M15" value="372.57108135037436" />
-      <entry key="M30" value="454.6051355622754" />
-      <entry key="H1" value="514.3559068218701" />
-      <entry key="H2" value="551.7811324012869" />
-      <entry key="H4" value="572.9390786327516" />
-      <entry key="D1" value="592.0145576687418" />
-      <entry key="W1" value="595.4270384074997" />
+      <entry key="MS100" value="0.029977003728914504" />
+      <entry key="MS500" value="0.4961596909649405" />
+      <entry key="S2" value="1.1278796469859136" />
+      <entry key="S5" value="2.8973970780820726" />
+      <entry key="S10" value="5.858763696290771" />
+      <entry key="S30" value="15.83079272937337" />
+      <entry key="S60" value="36.092602532344586" />
+      <entry key="M2" value="87.21789630343805" />
+      <entry key="M5" value="208.2225909752803" />
+      <entry key="M10" value="315.2287928375953" />
+      <entry key="M15" value="374.5518016805258" />
+      <entry key="M30" value="462.38185333852186" />
+      <entry key="H1" value="526.1214427240235" />
+      <entry key="H2" value="565.9690479229588" />
+      <entry key="H4" value="588.4779820906296" />
+      <entry key="D1" value="608.762770917493" />
+      <entry key="W1" value="612.3908575281094" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -79,6 +87,9 @@
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3KKWucTcMLE1ynkZNFfTORFrPii" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -93,7 +104,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "backend/db/connection",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -106,7 +117,7 @@
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Anthony\\Desktop\\Universidad\\6to semestre\\Archivos 1\\Proyecto 2\\FileForge\\file-forge\\node_modules\\prettier",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2026.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external"
+    "ts.external.directory.path": "C:\\Users\\Anthony\\AppData\\Local\\JetBrains\\IntelliJIdea2026.2\\ts-go-native-preview\\v7.0.0-dev.jetbrains.20260702.4\\node_modules\\@typescript\\native-preview-win32-x64\\lib"
   }
 }]]></component>
   <component name="SharedIndexes">
