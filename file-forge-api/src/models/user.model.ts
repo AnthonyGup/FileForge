@@ -7,7 +7,7 @@ export interface IUser {
     email: string;
     passwordHash: string;
     role: UserRole;
-    actve: boolean;
+    active: boolean;
     storageUsed: number;
     lastLoginAt: Date | null;
     createdAt: Date;
@@ -26,7 +26,7 @@ const userSchema = new Schema<IUser>(
     },
     {
         collection: 'users',
-        timestamp: true, // createdAt y updatedAt automaticos
+        timestamps: true, // createdAt y updatedAt automaticos
         toJSON: jsonOptions(['passwordHash'])
     }
 );

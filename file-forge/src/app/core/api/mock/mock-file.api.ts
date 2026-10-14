@@ -9,8 +9,6 @@ import { FileApi } from '../file.api';
 import { MockDb } from '../../mock/mock-db';
 import { MOCK_DELAY, fail, newId, now, paginate, respond } from '../../mock/mock-utils';
 
-const MAX_SIZE = 1_048_576; // 1 MB
-
 @Injectable()
 export class MockFileApi extends FileApi {
   private readonly db = inject(MockDb);
@@ -64,7 +62,6 @@ export class MockFileApi extends FileApi {
         const name = file.name.trim();
         const match = /\.(txt|md)$/i.exec(name);
         if (!match) fail(400, 'Solo se permiten archivos .txt y .md');
-        if (file.size > MAX_SIZE) fail(413, 'El archivo supera el tamaño máximo de 1 MB');
 
         let ownerId = this.db.me.id;
         if (folderId) {
@@ -106,7 +103,6 @@ export class MockFileApi extends FileApi {
       this.db.assertAccess('file', id, 'edit');
       const file = this.db.file(id);
       const newSize = new Blob([req.content]).size;
-      if (newSize > MAX_SIZE) fail(413, 'El archivo supera el tamaño máximo de 1 MB');
 
       this.db.adjustStorage(file.ownerId, newSize - file.size);
       this.db.contents.set(id, req.content);

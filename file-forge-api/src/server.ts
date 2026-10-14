@@ -1,9 +1,11 @@
 import { env } from "./config/env";
 import { connectDb, disconnectDb } from './config/db';
 import { createApp } from "./app";
+import { ensureIndexes } from './models';
 
 async function main(): Promise<void> {
   await connectDb();
+  await ensureIndexes();
 
   const app = createApp();
   const server = app.listen(env.PORT, () =>  {

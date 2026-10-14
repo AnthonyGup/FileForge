@@ -55,9 +55,7 @@
       ></textarea>
 
       <footer class="viewer__footer">
-        <span class="viewer__count" [class.viewer__count--limit]="byteCount() > maxSize">
-          {{ byteCount() | fileSize }} / {{ maxSize | fileSize }}
-        </span>
+        <span class="viewer__count">{{ byteCount() | fileSize }}</span>
         <div class="dialog-actions">
           <button type="button" class="btn" (click)="cancelEdit()" [disabled]="saving()">Cancelar</button>
           <button type="button" class="btn btn--primary" (click)="save()" [disabled]="saving() || !dirty()">

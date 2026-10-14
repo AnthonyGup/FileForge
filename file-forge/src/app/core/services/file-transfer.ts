@@ -4,7 +4,6 @@ import { ApiError, FileItem } from '@app/core/models';
 import { FileApi } from '@app/core/api';
 
 export const ALLOWED_PATTERN = /\.(txt|md)$/i;
-export const MAX_FILE_SIZE = 1_048_576; // 1 MB
 
 export interface UploadResult {
   name: string;
@@ -20,7 +19,6 @@ export class FileTransfer {
   /** Devuelve el motivo del rechazo o null si el archivo es válido. */
   validate(file: File): string | null {
     if (!ALLOWED_PATTERN.test(file.name)) return 'Solo se permiten archivos .txt y .md';
-    if (file.size > MAX_FILE_SIZE) return 'Supera el tamaño máximo de 1 MB';
     return null;
   }
 

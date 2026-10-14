@@ -5,7 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ApiError, FileItem } from '@app/core/models';
 import { FileApi } from '@app/core/api';
 import { Auth } from '@app/core/services/auth';
-import { FileTransfer, MAX_FILE_SIZE } from '@app/core/services/file-transfer';
+import { FileTransfer } from '@app/core/services/file-transfer';
 import { Toast } from '@app/core/services/toast';
 import { ConfirmDialog } from '@app/shared/components/confirm-dialog/confirm-dialog';
 import { FileSizePipe } from '@app/shared/pipes/file-size-pipe';
@@ -43,7 +43,6 @@ export class FileViewer {
   protected readonly downloading = signal(false);
   protected readonly discardIntent = signal<DiscardIntent>(null);
 
-  protected readonly maxSize = MAX_FILE_SIZE;
   protected readonly dirty = computed(() => this.draft() !== this.content());
   protected readonly meId = computed(() => this.auth.user()?.id ?? null);
   protected readonly byteCount = computed(() => new TextEncoder().encode(this.draft()).length);
