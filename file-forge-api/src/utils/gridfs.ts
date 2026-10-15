@@ -62,7 +62,7 @@ export function openContentStream(id: Types.ObjectId) {
  */
 export async function deleteContent(id: Types.ObjectId): Promise<void> {
     try {
-        await getBucket().delet(id);
+        await getBucket().delete(id);
     } catch (err) {
         const notFound = err instanceof Error && err.message.includes('FileNotFound');
         if (!notFound) throw err;
