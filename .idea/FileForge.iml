@@ -2,7 +2,14 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/file-forge/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/file-forge/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/file-forge/.angular" />
+      <excludeFolder url="file://$MODULE_DIR$/file-forge/out-tsc" />
+      <excludeFolder url="file://$MODULE_DIR$/file-forge-api/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/file-forge-api/dist" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
