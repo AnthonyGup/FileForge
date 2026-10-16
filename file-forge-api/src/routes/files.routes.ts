@@ -1,0 +1,24 @@
+import { Router } from 'express';
+import {
+  downloadFileController,
+  getContentController,
+  getFileController,
+  listFilesController,
+  updateContentController,
+  updateFileController,
+  uploadFileController
+} from '../controllers/files.controller';
+import { authenticate } from '../middlewares/authenticate';
+import { uploadSingle } from '../middlewares/upload';
+
+export const filesRouter = Router();
+
+filesRouter.use(authenticate);
+
+filesRouter.get('/', listFilesController);
+filesRouter.post('/', uploadSingle, uploadFileController);
+filesRouter.get('/:id/content', getContentController);
+filesRouter.put('/:id/content', updateContentController);
+filesRouter.get('/:id/download', downloadFileController);
+filesRouter.get('/:id', getFileController);
+filesRouter.patch('/:id', updateFileController);
