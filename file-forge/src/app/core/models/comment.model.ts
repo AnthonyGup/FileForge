@@ -11,3 +11,7 @@ export interface Comment {
 export interface CreateCommentRequest {
   text: string;
 }
+
+export interface UpdateCommentRequest {
+  text: string;
+}

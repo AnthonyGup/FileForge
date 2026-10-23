@@ -33,7 +33,7 @@
       </div>
     </div>
   } @else {
-    <p class="comments__readonly">Solo el propietario puede comentar.</p>
+    <p class="comments__readonly">No tienes permiso para comentar este archivo.</p>
   }
 
   @if (loading()) {
@@ -47,12 +47,86 @@
       @for (comment of comments(); track comment.id) {
         <li class="comment">
           <div class="comment__head">
-            <span class="comment__author">{{ comment.author.name }}</span>
+            <div class="comment__identity">
+              <span class="comment__author">{{ comment.author.name }}</span>
+              @if (isAuthor(comment)) {
+                <span class="comment__badge">Tú</span>
+              }
+            </div>
             <span class="comment__date">{{ comment.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
           </div>
-          <p class="comment__text">{{ comment.text }}</p>
+
+          @if (editingId() === comment.id) {
+            <div class="comment__edit">
+              <textarea
+                class="comments__input"
+                [value]="editText()"
+                (input)="onEditInput($event)"
+                aria-label="Editar comentario"
+                [disabled]="savingId() === comment.id"
+              ></textarea>
+              <div class="comment__actions">
+                <button
+                  type="button"
+                  class="btn btn--primary"
+                  [disabled]="savingId() === comment.id || !editText().trim()"
+                  (click)="saveEdit(comment)"
+                >
+                  {{ savingId() === comment.id ? 'Guardando…' : 'Guardar' }}
+                </button>
+                <button
+                  type="button"
+                  class="btn"
+                  [disabled]="savingId() === comment.id"
+                  (click)="cancelEdit()"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          } @else {
+            <p class="comment__text">{{ comment.text }}</p>
+            @if (canEdit(comment) || canDelete(comment)) {
+              <div class="comment__actions">
+                @if (canEdit(comment)) {
+                  <button
+                    type="button"
+                    class="icon-btn"
+                    title="Editar comentario"
+                    [attr.aria-label]="'Editar comentario de ' + comment.author.name"
+                    (click)="startEdit(comment)"
+                  >
+                    <app-ui-icon name="edit" />
+                  </button>
+                }
+                @if (canDelete(comment)) {
+                  <button
+                    type="button"
+                    class="icon-btn icon-btn--danger"
+                    title="Eliminar comentario"
+                    [attr.aria-label]="'Eliminar comentario de ' + comment.author.name"
+                    (click)="requestDelete(comment)"
+                  >
+                    <app-ui-icon name="delete" />
+                  </button>
+                }
+              </div>
+            }
+          }
         </li>
       }
     </ul>
   }
 </section>
+
+@if (pendingDelete(); as comment) {
+  <app-confirm-dialog
+    title="Eliminar comentario"
+    message="¿Seguro que quieres eliminar este comentario? Esta acción no se puede deshacer."
+    confirmLabel="Eliminar"
+    [danger]="true"
+    [busy]="deleting()"
+    (confirmed)="confirmDelete()"
+    (cancelled)="cancelDelete()"
+  />
+}

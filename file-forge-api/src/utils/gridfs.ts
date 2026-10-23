@@ -1,5 +1,4 @@
 import mongoose, { Types } from 'mongoose';
-import {promise} from "zod/v3";
 export const BUCKET_NAME = 'contents'
 
 type Bucket = InstanceType<typeof mongoose.mongo.GridFSBucket>;

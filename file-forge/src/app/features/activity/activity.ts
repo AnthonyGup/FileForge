@@ -141,6 +141,8 @@ export class Activity {
       update_share: 'updateShare',
       revoke_share: 'revokeShare',
       comment: 'comment',
+      update_comment: 'edit',
+      delete_comment: 'delete'
     };
     return icons[action] || 'activity';
   }

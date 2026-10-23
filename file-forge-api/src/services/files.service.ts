@@ -15,7 +15,12 @@ import { deleteContent, readContent, uploadContent } from '../utils/gridfs';
 import { HttpError } from '../utils/http-error';
 import { isDuplicateKey } from '../utils/mongo-errors';
 import { fileRef, logActivity } from './activity.service';
-import { assertFileAccess, assertFileOwner, assertFolderAccess } from './permission.service';
+import {
+  assertFileAccess,
+  assertFileOwner,
+  assertFolderAccess,
+  permissionOnFile
+} from './permission.service';
 
 const EXTENSION_RE = /\.(txt|md)$/i;
 const NAME_COLLATION = { locale: 'es', strength: 2 };
@@ -185,8 +190,13 @@ export async function listFiles(input: ListFilesInput, user: UserDoc): Promise<F
   return { items, total, page: input.page, pageSize: input.pageSize };
 }
 
-export function getFile(id: string, user: UserDoc): Promise<FileDoc> {
-  return assertFileAccess(id, 'read', user);
+export async function getFile(
+  id: string,
+  user: UserDoc
+): Promise<Record<string, unknown>> {
+  const file = await assertFileAccess(id, 'read', user);
+  const permission = await permissionOnFile(file, user._id);
+  return { ...file.toJSON(), permission: permission ?? 'read' };
 }
 
 export async function getFileContent(

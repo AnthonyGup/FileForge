@@ -36,7 +36,9 @@
         </button>
 
         @if (mode() === 'view') {
-          <button type="button" class="btn btn--primary" (click)="startEdit()"><app-ui-icon name="edit" /> Editar</button>
+          @if (canEditFile()) {
+            <button type="button" class="btn btn--primary" (click)="startEdit()"><app-ui-icon name="edit" /> Editar</button>
+          }
         }
       </div>
     </header>
@@ -76,7 +78,11 @@
     }
 
     @if (mode() === 'view') {
-      <app-file-comments [fileId]="fileId()" [canComment]="f.ownerId === meId()" />
+      <app-file-comments
+        [fileId]="fileId()"
+        [canComment]="canCommentFile()"
+        [canModerate]="canModerate()"
+      />
     }
   }
 </section>

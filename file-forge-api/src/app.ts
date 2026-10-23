@@ -8,6 +8,7 @@ import { router } from './routes';
 export function createApp() {
   const app = express();
 
+  app.disable('x-powered-by');
   app.use(cors({ origin: env.CORS_ORIGIN, exposedHeaders: ['Content-Disposition'] }));
   app.use(express.json({ limit: '10mb' }));
 

@@ -14,7 +14,9 @@ export type ActivityAction =
   | 'share'
   | 'update_share'
   | 'revoke_share'
-  | 'comment';
+  | 'comment'
+  | 'update_comment'
+  | 'delete_comment';
 
 // Copia embebida del recurso al momento de la acción
 export interface ActivityResource {
@@ -59,4 +61,6 @@ export const ACTIVITY_LABELS: Record<ActivityAction, string> = {
   update_share: 'Permiso actualizado',
   revoke_share: 'Acceso retirado',
   comment: 'Comentario',
+  update_comment: 'Comentario editado',
+  delete_comment: 'Comentario eliminado'
 };

@@ -100,9 +100,24 @@
   margin-bottom: 0.25rem;
 }
 
+.comment__identity {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .comment__author {
   font-weight: 600;
   font-size: 0.9rem;
+}
+
+.comment__badge {
+  font-size: 0.65rem;
+  padding: 0.05rem 0.35rem;
+  border-radius: 999px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .comment__date {
@@ -116,4 +131,21 @@
   font-size: 0.9rem;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.comment__edit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.comment__actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.comment__actions .icon-btn {
+  padding: 0.4rem;
 }

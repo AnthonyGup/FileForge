@@ -5,24 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6ac2ab8-e4c7-4284-9ef6-8615e4e9af6c" name="Changes" comment="feat: layout con navbar, sidebar y shell">
-      <change beforePath="$PROJECT_DIR$/file-forge-api/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/auth.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge-api/src/routes/auth.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/routes/auth.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge-api/src/schemas/auth.schemas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/schemas/auth.schemas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/controllers/comments.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/comments.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/models/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/models/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/routes/comments.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/routes/comments.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/schemas/comment.schemas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/schemas/comment.schemas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/scripts/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/scripts/seed.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file-forge-api/src/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/services/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/auth.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/api/auth.api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/http/http-auth.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/api/http/http-auth.api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/models/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/models/user.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/services/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/services/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/icons/ui-icons.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/icons/ui-icons.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/services/comments.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/services/comments.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/services/files.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/services/files.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/utils/gridfs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/utils/gridfs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/comment.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/api/comment.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/http/http-comment.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/api/http/http-comment.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/models/activity.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/models/activity.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/models/comment.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/models/comment.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/models/common.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/models/common.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/models/file.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/models/file.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/activity/activity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/activity/activity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-comments/file-comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-comments/file-comments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-comments/file-comments.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-comments/file-comments.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-comments/file-comments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-comments/file-comments.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,61 +47,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0851651100380229E-5" />
-      <entry key="MS500" value="0.26970619214066266" />
-      <entry key="S2" value="2.5754855051574492" />
-      <entry key="S5" value="4.250247491847541" />
-      <entry key="S10" value="5.045173406551009" />
-      <entry key="S30" value="7.660717103788956" />
-      <entry key="S60" value="22.875247210503975" />
-      <entry key="M2" value="70.09716326886523" />
-      <entry key="M5" value="203.00121985165856" />
-      <entry key="M10" value="333.7416611008919" />
-      <entry key="M15" value="407.3529403548166" />
-      <entry key="M30" value="514.5720124251604" />
-      <entry key="H1" value="590.7588665446968" />
-      <entry key="H2" value="637.8362671982463" />
-      <entry key="H4" value="664.2840194581918" />
-      <entry key="D1" value="688.0445759554254" />
-      <entry key="W1" value="692.2877668485859" />
+      <entry key="MS100" value="1.5147474686211847E-7" />
+      <entry key="MS500" value="0.11915788398881141" />
+      <entry key="S2" value="2.144842752225923" />
+      <entry key="S5" value="3.959116051909411" />
+      <entry key="S10" value="4.870403988960376" />
+      <entry key="S30" value="5.596119611708134" />
+      <entry key="S60" value="5.794427290557009" />
+      <entry key="M2" value="5.897178346699801" />
+      <entry key="M5" value="6.89015281020385" />
+      <entry key="M10" value="21.790277797558208" />
+      <entry key="M15" value="56.43327020796662" />
+      <entry key="M30" value="190.0977261583187" />
+      <entry key="H1" value="376.62221711814647" />
+      <entry key="H2" value="539.2733822158392" />
+      <entry key="H4" value="648.0484128934843" />
+      <entry key="D1" value="756.9315391070527" />
+      <entry key="W1" value="777.5115093636583" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
       <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0000000005327032" />
-      <entry key="S10" value="1.0000317071463805" />
-      <entry key="S30" value="1.0588146188431136" />
-      <entry key="S60" value="1.4310325109100903" />
-      <entry key="M2" value="2.349862848846148" />
-      <entry key="M5" value="4.5456164465935" />
-      <entry key="M10" value="7.391438467186563" />
-      <entry key="M15" value="9.840804676036623" />
-      <entry key="M30" value="14.80143991987687" />
-      <entry key="H1" value="19.21988924485156" />
-      <entry key="H2" value="22.24019589647944" />
-      <entry key="H4" value="24.01616688377" />
-      <entry key="D1" value="25.653827740539047" />
-      <entry key="W1" value="25.950151170232544" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.000000000000176" />
+      <entry key="M2" value="1.0000004345105087" />
+      <entry key="M5" value="1.0052050963696624" />
+      <entry key="M10" value="1.222604673588423" />
+      <entry key="M15" value="1.9356885672857254" />
+      <entry key="M30" value="5.581463741508362" />
+      <entry key="H1" value="11.858160265038485" />
+      <entry key="H2" value="18.02057686546248" />
+      <entry key="H4" value="22.405712272212376" />
+      <entry key="D1" value="26.969888594274096" />
+      <entry key="W1" value="27.850244099993215" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="3.4142532727547926E-5" />
-      <entry key="MS500" value="0.3866007139056382" />
-      <entry key="S2" value="3.158140089373128" />
-      <entry key="S5" value="5.055479798326269" />
-      <entry key="S10" value="5.942445567054149" />
-      <entry key="S30" value="8.678494138642055" />
-      <entry key="S60" value="24.264304499888333" />
-      <entry key="M2" value="72.3974004881166" />
-      <entry key="M5" value="207.49921065003412" />
-      <entry key="M10" value="341.09254455653615" />
-      <entry key="M15" value="417.15805823822654" />
-      <entry key="M30" value="529.347431518392" />
-      <entry key="H1" value="609.9622498395947" />
-      <entry key="H2" value="660.0670359979352" />
-      <entry key="H4" value="688.2951302855154" />
-      <entry key="D1" value="713.6975086175236" />
-      <entry key="W1" value="718.2377887990093" />
+      <entry key="MS100" value="2.084600066627862E-5" />
+      <entry key="MS500" value="0.23379513243788727" />
+      <entry key="S2" value="2.7235731685858253" />
+      <entry key="S5" value="4.761851948137489" />
+      <entry key="S10" value="5.76618316725169" />
+      <entry key="S30" value="6.560051362651698" />
+      <entry key="S60" value="6.776221439165169" />
+      <entry key="M2" value="6.888032381351128" />
+      <entry key="M5" value="7.891625699585111" />
+      <entry key="M10" value="23.009914954668112" />
+      <entry key="M15" value="58.36455540794588" />
+      <entry key="M30" value="195.67085043404344" />
+      <entry key="H1" value="388.4710222236036" />
+      <entry key="H2" value="557.286769608302" />
+      <entry key="H4" value="670.4496433216644" />
+      <entry key="D1" value="783.900527576186" />
+      <entry key="W1" value="805.3616206649015" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{

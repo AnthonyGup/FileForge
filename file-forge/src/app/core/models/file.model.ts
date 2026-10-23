@@ -1,4 +1,4 @@
-import { ISODateString } from './common.model';
+import { FilePermission, ISODateString } from './common.model';
 
 export type FileExtension = 'txt' | 'md';
 
@@ -16,6 +16,8 @@ export interface FileItem {
   deletedRootId: string | null;
   createdAt: ISODateString;
   updatedAt: ISODateString;
+  // Solo lo devuelve GET /files/:id
+  permission?: FilePermission;
 }
 
 export interface RenameFileRequest {

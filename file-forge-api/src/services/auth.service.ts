@@ -16,6 +16,7 @@ const DUMMY_HASH = bcrypt.hashSync('contraseña-inexistente', 10);
 export function signToken(user: UserDoc): string {
     return jwt.sign({}, env.JWT_SECRET, {
         subject: user.id,
+        algorithm: 'HS256',
         expiresIn: env.JWT_EXPIRES_IN as SignOptions['expiresIn']
     });
 }
@@ -26,7 +27,7 @@ export function signToken(user: UserDoc): string {
  */
 export function verifyToken(token: string): string {
     try {
-        const payload = jwt.verify(token, env.JWT_SECRET);
+        const payload = jwt.verify(token, env.JWT_SECRET, { algorithms: ['HS256'] });
         if (typeof payload == 'string' || typeof  payload.sub != 'string') {
             throw new Error('Payload invalido');
         }

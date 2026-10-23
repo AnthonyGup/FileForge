@@ -47,10 +47,24 @@ export class FileViewer {
 
   protected readonly dirty = computed(() => this.draft() !== this.content());
   protected readonly meId = computed(() => this.auth.user()?.id ?? null);
+  protected readonly isAdmin = computed(() => this.auth.isAdmin());
   protected readonly byteCount = computed(() => new TextEncoder().encode(this.draft()).length);
   protected readonly backLink = computed<string[]>(() => {
     const folderId = this.file()?.folderId;
     return folderId ? ['/explorer', folderId] : ['/explorer'];
+  });
+
+  protected readonly canEditFile = computed(() => {
+    const f = this.file();
+    return f ? f.permission === 'owner' || f.permission === 'edit' : false;
+  });
+  protected readonly canCommentFile = computed(() => {
+    const f = this.file();
+    return f ? f.permission === 'owner' || f.permission === 'comment' || f.permission === 'edit' : false;
+  });
+  protected readonly canModerate = computed(() => {
+    const f = this.file();
+    return f ? f.permission === 'owner' || this.isAdmin() : false;
   });
 
   private readonly refreshTick = signal(0);

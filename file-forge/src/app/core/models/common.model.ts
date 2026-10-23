@@ -4,6 +4,9 @@ export type ResourceType = 'file' | 'folder';
 
 export type PermissionLevel = 'read' | 'comment' | 'edit';
 
+// Permiso efectivo del solicitante sobre un recurso (GET /files/:id)
+export type FilePermission = 'owner' | PermissionLevel;
+
 // Copia embebida de un usuario (historial y comentarios)
 export interface UserRef {
   id: string;

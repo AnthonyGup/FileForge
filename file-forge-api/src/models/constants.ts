@@ -24,6 +24,8 @@ export const ACTIVITY_ACTIONS = [
     'share',
     'update_share',
     'revoke_share',
-    'comment'
+    'comment',
+    'update_comment',
+    'delete_comment'
 ] as const;
 export type ActivityAction = (typeof ACTIVITY_ACTIONS)[number];
