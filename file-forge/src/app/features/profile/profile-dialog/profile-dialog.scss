@@ -1,0 +1,29 @@
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.profile__divider {
+  height: 1px;
+  background: var(--color-border-soft);
+}
+
+.profile__hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.profile__password {
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    border-radius: 8px;
+    padding: 0 0.75rem;
+    cursor: pointer;
+  }
+}

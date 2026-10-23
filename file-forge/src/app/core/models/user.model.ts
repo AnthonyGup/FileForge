@@ -42,3 +42,10 @@ export interface UpdateUserRequest {
   role?: UserRole;
   active?: boolean;
 }
+
+export interface UpdateProfileRequest {
+  name?: string;
+  email?: string;
+  currentPassword?: string;
+  newPassword?: string;
+}

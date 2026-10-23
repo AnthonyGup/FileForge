@@ -2,7 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LoginRequest, LoginResponse, RegisterRequest, User } from '@app/core/models';
+import { LoginRequest, LoginResponse, RegisterRequest, UpdateProfileRequest, User } from '@app/core/models';
 import { AuthApi } from '@app/core/api';
 
 const TOKEN_KEY = 'token';
@@ -29,6 +29,10 @@ export class Auth {
     return this.api.register(req).pipe(map(res => this.store(res)));
   }
 
+  updateProfile(req: UpdateProfileRequest): Observable<User> {
+    return this.api.updateProfile(req).pipe(map(user => this.storeUser(user)));
+  }
+
   logout(): void {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
@@ -39,10 +43,14 @@ export class Auth {
 
   private store(res: LoginResponse): User {
     localStorage.setItem(TOKEN_KEY, res.token);
-    localStorage.setItem(USER_KEY, JSON.stringify(res.user));
     this._token.set(res.token);
-    this._user.set(res.user);
-    return res.user;
+    return this.storeUser(res.user);
+  }
+
+  private storeUser(user: User): User {
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    this._user.set(user);
+    return user;
   }
 
   private readStoredUser(): User | null {

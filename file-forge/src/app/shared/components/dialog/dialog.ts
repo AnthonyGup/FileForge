@@ -9,6 +9,8 @@ import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 })
 export class Dialog {
   readonly title = input.required<string>();
+  readonly showBack = input(false);
+  readonly closeOnBackdrop = input(true);
   readonly closed = output<void>();
 
   private readonly dialogEl = viewChild.required<ElementRef<HTMLDialogElement>>('dlg');
@@ -23,7 +25,7 @@ export class Dialog {
   }
 
   protected onBackdropClick(event: MouseEvent): void {
-    if (event.target === this.dialogEl().nativeElement) {
+    if (this.closeOnBackdrop() && event.target === this.dialogEl().nativeElement) {
       this.closed.emit();
     }
   }

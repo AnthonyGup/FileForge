@@ -27,6 +27,18 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-hover);
+    border-color: var(--color-border);
+  }
 }
 
 .navbar__avatar {
@@ -44,21 +56,12 @@
   display: flex;
   flex-direction: column;
   line-height: 1.2;
+  text-align: left;
 }
 
 .navbar__role {
   font-size: 0.75rem;
   color: var(--color-muted);
-}
-
-.navbar__logout {
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  border-radius: 8px;
-  padding: 0.4rem 0.75rem;
-  cursor: pointer;
-
-  &:hover { background: var(--color-hover); }
 }
 
 @media (max-width: 768px) {

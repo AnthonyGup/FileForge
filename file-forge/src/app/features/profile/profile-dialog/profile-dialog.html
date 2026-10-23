@@ -1,0 +1,65 @@
+<app-dialog title="Mi perfil" [showBack]="true" [closeOnBackdrop]="false" (closed)="closed.emit()">
+  <form class="profile__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <label class="field">
+      <span>Nombre</span>
+      <input type="text" formControlName="name" autocomplete="name" />
+      @if (form.controls.name.touched && form.controls.name.invalid) {
+        <small class="field-error">El nombre es obligatorio</small>
+      }
+    </label>
+
+    <label class="field">
+      <span>Correo electrónico</span>
+      <input type="email" formControlName="email" autocomplete="email" />
+      @if (form.controls.email.touched && form.controls.email.invalid) {
+        <small class="field-error">Ingresa un correo válido</small>
+      }
+    </label>
+
+    <div class="profile__divider"></div>
+
+    <p class="profile__hint">Cambiar contraseña (opcional). Deja estos campos vacíos para conservarla.</p>
+
+    <label class="field">
+      <span>Contraseña actual</span>
+      <input type="password" formControlName="currentPassword" autocomplete="current-password" />
+    </label>
+
+    <label class="field">
+      <span>Nueva contraseña</span>
+      <div class="profile__password">
+        <input
+          [type]="showPassword() ? 'text' : 'password'"
+          formControlName="newPassword"
+          autocomplete="new-password"
+        />
+        <button type="button" (click)="toggleShowPassword()">
+          {{ showPassword() ? 'Ocultar' : 'Mostrar' }}
+        </button>
+      </div>
+      @if (form.controls.newPassword.touched && form.controls.newPassword.invalid) {
+        <small class="field-error">Debe tener al menos 6 caracteres</small>
+      }
+    </label>
+
+    <label class="field">
+      <span>Confirmar nueva contraseña</span>
+      <input
+        [type]="showPassword() ? 'text' : 'password'"
+        formControlName="confirm"
+        autocomplete="new-password"
+      />
+    </label>
+
+    @if (error()) {
+      <div class="form-alert" role="alert">{{ error() }}</div>
+    }
+
+    <div class="dialog-actions">
+      <button type="button" class="btn" (click)="closed.emit()">Cancelar</button>
+      <button type="submit" class="btn btn--primary" [disabled]="saving()">
+        {{ saving() ? 'Guardando...' : 'Guardar cambios' }}
+      </button>
+    </div>
+  </form>
+</app-dialog>

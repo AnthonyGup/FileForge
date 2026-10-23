@@ -38,15 +38,6 @@
       {{ loading() ? 'Ingresando...' : 'Iniciar sesión' }}
     </button>
 
-    <div class="login__demo">
-      <span>Acceso rápido (demo):</span>
-      <div>
-        @for (u of demoUsers; track u.email) {
-          <button type="button" (click)="fillDemo(u.email)">{{ u.label }}</button>
-        }
-      </div>
-    </div>
-
     <p class="login__link">
       ¿No tienes cuenta? <a routerLink="/register">Regístrate</a>
     </p>

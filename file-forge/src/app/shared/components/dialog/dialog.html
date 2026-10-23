@@ -1,6 +1,11 @@
 <dialog #dlg class="dialog" (cancel)="onCancel($event)" (click)="onBackdropClick($event)">
   <div class="dialog__panel">
     <header class="dialog__header">
+      @if (showBack()) {
+        <button type="button" class="dialog__back" (click)="closed.emit()" aria-label="Volver">
+          <app-ui-icon name="back" />
+        </button>
+      }
       <h2>{{ title() }}</h2>
       <button type="button" (click)="closed.emit()" aria-label="Cerrar"><app-ui-icon name="close" /></button>
     </header>

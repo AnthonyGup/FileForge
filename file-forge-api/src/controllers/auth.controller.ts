@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { currentUser } from '../middlewares/authenticate';
-import { loginSchema, registerSchema } from '../schemas/auth.schemas';
+import { loginSchema, registerSchema, updateProfileSchema } from '../schemas/auth.schemas';
 import * as authService from '../services/auth.service';
 import { parse } from '../utils/validate';
 
@@ -18,4 +18,9 @@ export async function registerController(req: Request, res: Response): Promise<v
 
 export function meController(req: Request, res: Response): void {
     res.json(currentUser(req));
+}
+
+export async function updateProfileController(req: Request, res: Response): Promise<void> {
+    const data = parse(updateProfileSchema, req.body);
+    res.json(await authService.updateProfile(currentUser(req), data));
 }

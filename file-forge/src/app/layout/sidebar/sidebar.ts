@@ -20,7 +20,7 @@ interface MenuItem {
 })
 export class Sidebar {
   protected readonly layout = inject(Layout);
-  private readonly auth = inject(Auth);
+  protected readonly auth = inject(Auth);
 
   protected readonly items: MenuItem[] = [
     { label: 'Mis archivos', icon: 'folder', route: '/explorer' },

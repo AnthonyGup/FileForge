@@ -6,14 +6,21 @@
   <div class="navbar__spacer"></div>
 
   @if (auth.user(); as user) {
-    <div class="navbar__user">
+    <button
+      type="button"
+      class="navbar__user"
+      (click)="profileOpen.set(true)"
+      aria-label="Editar mi perfil"
+    >
       <span class="navbar__avatar">{{ user.name.charAt(0) }}</span>
-      <div class="navbar__info">
+      <span class="navbar__info">
         <span class="navbar__name">{{ user.name }}</span>
         <span class="navbar__role">{{ user.role === 'admin' ? 'Administrador' : 'Usuario' }}</span>
-      </div>
-    </div>
+      </span>
+    </button>
+  }
 
-    <button class="navbar__logout" (click)="auth.logout()">Cerrar sesión</button>
+  @if (profileOpen()) {
+    <app-profile-dialog (closed)="profileOpen.set(false)" />
   }
 </header>

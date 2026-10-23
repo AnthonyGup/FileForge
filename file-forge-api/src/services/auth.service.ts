@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { env } from '../config/env';
 import { User, UserDoc } from '../models';
-import { RegisterInput } from '../schemas/auth.schemas';
+import { RegisterInput, UpdateProfileInput } from '../schemas/auth.schemas';
 import { HttpError } from '../utils/http-error';
 import { isDuplicateKey } from '../utils/mongo-errors';
 import { logActivity } from './activity.service';
@@ -54,6 +54,30 @@ export async function login(email: string, password: string): Promise<{ token: s
     await logActivity({ user, action: 'login' });
 
     return { token: signToken(user), user };
+}
+
+export async function updateProfile(user: UserDoc, data: UpdateProfileInput): Promise<UserDoc> {
+    if (data.newPassword) {
+        const passwordOk = await bcrypt.compare(data.currentPassword ?? '', user.passwordHash);
+        if (!passwordOk) {
+            throw HttpError.badRequest('La contraseña actual no es correcta');
+        }
+        user.passwordHash = await bcrypt.hash(data.newPassword, 10);
+    }
+
+    if (data.name !== undefined) user.name = data.name;
+    if (data.email !== undefined) user.email = data.email;
+
+    try {
+        await user.save();
+    } catch (err) {
+        if (isDuplicateKey(err)) {
+            throw HttpError.conflict('El email ya está registrado');
+        }
+        throw err;
+    }
+
+    return user;
 }
 
 export async function register(data: RegisterInput): Promise<{ token: string; user: UserDoc }> {

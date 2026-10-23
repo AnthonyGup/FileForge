@@ -18,6 +18,7 @@ export type UiIconName =
   | 'reports'
   | 'admin'
   | 'login'
+  | 'logout'
   | 'comment'
   | 'updateShare'
   | 'revokeShare'
@@ -118,6 +119,11 @@ export const UI_PATHS: Record<UiIconName, string[]> = {
     'M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4',
     'M10 17l5-5-5-5',
     'M15 12H3'
+  ],
+  logout: [
+    'M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4',
+    'm16 17 5-5-5-5',
+    'M21 12H9'
   ],
   comment: [
     'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z'

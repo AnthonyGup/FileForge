@@ -31,8 +31,14 @@ type ReportKind =
 interface ReportTab {
   kind: ReportKind;
   label: string;
+  group: string;
   config: ReportsFilterConfig;
   adminOnly?: boolean;
+}
+
+interface ReportGroup {
+  label: string;
+  tabs: ReportTab[];
 }
 
 interface FetchResult {
@@ -45,6 +51,8 @@ const cfg = (dates = false, limit = false, period = false, users = false): Repor
   ({ dates, limit, period, users });
 
 const BARS: ReportColumn = { field: 'percent', label: 'Distribución', type: 'bar' };
+
+const GROUP_ORDER = ['Archivos', 'Usuarios', 'Compartidos', 'Actividad'];
 
 const COLS: Record<ReportKind, ReportColumn[]> = {
   'files-by-type': [
@@ -138,23 +146,27 @@ export class Reports {
   private readonly auth = inject(Auth);
 
   protected readonly tabs: ReportTab[] = [
-    { kind: 'files-by-type', label: 'Archivos por tipo', config: cfg(true) },
-    { kind: 'files-by-date', label: 'Archivos por fecha', config: cfg(true) },
-    { kind: 'files-by-operations', label: 'Operaciones por archivo', config: cfg(true, true) },
-    { kind: 'top-users-by-files', label: 'Usuarios por archivos', config: cfg(true, true), adminOnly: true },
-    { kind: 'users-by-shares', label: 'Usuarios por compartidos', config: cfg(true, true), adminOnly: true },
-    { kind: 'files-by-shared-users', label: 'Archivos más compartidos', config: cfg(true, true) },
-    { kind: 'shared-by-user', label: 'Compartidos por usuario', config: cfg(false, false, false, true) },
-    { kind: 'received-by-user', label: 'Compartidos recibidos', config: cfg(false, false, false, true) },
-    { kind: 'activity', label: 'Actividad', config: cfg(true) },
-    { kind: 'activity-by-action', label: 'Actividad por acción', config: cfg(true) },
-    { kind: 'activity-by-period', label: 'Actividad por período', config: cfg(true, false, true) },
-    { kind: 'top-actions', label: 'Acciones frecuentes', config: cfg(true, true) },
-    { kind: 'storage', label: 'Almacenamiento', config: cfg(true) },
+    { kind: 'files-by-type', label: 'Archivos por tipo', group: 'Archivos', config: cfg(true) },
+    { kind: 'files-by-date', label: 'Archivos por fecha', group: 'Archivos', config: cfg(true) },
+    { kind: 'files-by-operations', label: 'Operaciones por archivo', group: 'Archivos', config: cfg(true, true) },
+    { kind: 'storage', label: 'Almacenamiento', group: 'Archivos', config: cfg(true) },
+    { kind: 'top-users-by-files', label: 'Usuarios por archivos', group: 'Usuarios', config: cfg(true, true), adminOnly: true },
+    { kind: 'users-by-shares', label: 'Usuarios por compartidos', group: 'Usuarios', config: cfg(true, true), adminOnly: true },
+    { kind: 'files-by-shared-users', label: 'Archivos más compartidos', group: 'Compartidos', config: cfg(true, true) },
+    { kind: 'shared-by-user', label: 'Compartidos por usuario', group: 'Compartidos', config: cfg(false, false, false, true) },
+    { kind: 'received-by-user', label: 'Compartidos recibidos', group: 'Compartidos', config: cfg(false, false, false, true) },
+    { kind: 'activity', label: 'Actividad', group: 'Actividad', config: cfg(true) },
+    { kind: 'activity-by-action', label: 'Actividad por acción', group: 'Actividad', config: cfg(true) },
+    { kind: 'activity-by-period', label: 'Actividad por período', group: 'Actividad', config: cfg(true, false, true) },
+    { kind: 'top-actions', label: 'Acciones frecuentes', group: 'Actividad', config: cfg(true, true) },
   ];
 
-  protected readonly visibleTabs = computed(() =>
-    this.tabs.filter(t => !t.adminOnly || this.auth.isAdmin()));
+  protected readonly groups = computed<ReportGroup[]>(() => {
+    const visible = this.tabs.filter(t => !t.adminOnly || this.auth.isAdmin());
+    return GROUP_ORDER
+      .map(label => ({ label, tabs: visible.filter(t => t.group === label) }))
+      .filter(group => group.tabs.length > 0);
+  });
 
   protected readonly currentTab = computed(() =>
     this.tabs.find(t => t.kind === this.report())!);

@@ -1,48 +1,55 @@
 <section class="reports">
   <header class="reports__header">
-    <div>
-      <h2 class="reports__title">Reportes</h2>
-      <p class="reports__subtitle">Estadísticas agregadas sobre documentos, usuarios y actividad.</p>
-    </div>
+    <h2 class="reports__title">Reportes</h2>
   </header>
 
-  <div class="reports__tabs" role="tablist" aria-label="Tipo de reporte">
-    @for (tab of visibleTabs(); track tab.kind) {
-      <button
-        type="button"
-        role="tab"
-        class="reports__tab"
-        [class.reports__tab--active]="report() === tab.kind"
-        [attr.aria-selected]="report() === tab.kind"
-        (click)="setReport(tab.kind)"
-      >
-        {{ tab.label }}
-      </button>
-    }
+  <div class="reports__layout">
+    <aside class="reports__menu" aria-label="Tipo de reporte">
+      @for (group of groups(); track group.label) {
+        <div class="reports__group">
+          <span class="reports__group-label">{{ group.label }}</span>
+          @for (tab of group.tabs; track tab.kind) {
+            <button
+              type="button"
+              class="reports__tab"
+              [class.reports__tab--active]="report() === tab.kind"
+              [attr.aria-pressed]="report() === tab.kind"
+              (click)="setReport(tab.kind)"
+            >
+              {{ tab.label }}
+            </button>
+          }
+        </div>
+      }
+    </aside>
+
+    <div class="reports__main">
+      <h3 class="reports__current">{{ currentTab().label }}</h3>
+
+      <app-reports-filters
+        [config]="currentTab().config"
+        [users]="users()"
+        (applied)="onFiltersApplied($event)"
+        (cleared)="onFiltersCleared()"
+      />
+
+      <app-reports-table
+        [columns]="columns()"
+        [rows]="rows()"
+        [loading]="loading()"
+        [error]="error()"
+      />
+
+      @if (report() === 'activity') {
+        <app-pagination
+          [page]="actPage()"
+          [pageSize]="actPageSize()"
+          [total]="total()"
+          [pageSizeOptions]="pageSizeOptions"
+          (pageChange)="onPageChange($event)"
+          (pageSizeChange)="onPageSizeChange($event)"
+        />
+      }
+    </div>
   </div>
-
-  <app-reports-filters
-    [config]="currentTab().config"
-    [users]="users()"
-    (applied)="onFiltersApplied($event)"
-    (cleared)="onFiltersCleared()"
-  />
-
-  <app-reports-table
-    [columns]="columns()"
-    [rows]="rows()"
-    [loading]="loading()"
-    [error]="error()"
-  />
-
-  @if (report() === 'activity') {
-    <app-pagination
-      [page]="actPage()"
-      [pageSize]="actPageSize()"
-      [total]="total()"
-      [pageSizeOptions]="pageSizeOptions"
-      (pageChange)="onPageChange($event)"
-      (pageSizeChange)="onPageSizeChange($event)"
-    />
-  }
 </section>

@@ -25,13 +25,6 @@ export class Login {
   protected readonly error = signal<string | null>(null);
   protected readonly showPassword = signal(false);
 
-  // Accesos rápidos para la revisión del proyecto
-  protected readonly demoUsers = [
-    { label: 'Admin', email: 'admin@demo.com' },
-    { label: 'Ana',   email: 'ana@demo.com' },
-    { label: 'Luis',  email: 'luis@demo.com' }
-  ];
-
   protected submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -51,11 +44,6 @@ export class Login {
         this.loading.set(false);
       }
     });
-  }
-
-  protected fillDemo(email: string): void {
-    this.form.setValue({ email, password: '123456' });
-    this.error.set(null);
   }
 
   protected toggleShowPassword(): void {
