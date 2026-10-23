@@ -226,7 +226,7 @@ export class Reports {
 
     // Helper for client-side pagination of shared reports
     const paginateResults = (rs: any[]): FetchResult => {
-      const total = rs.length;
+      const totalSum = rs.reduce((s, r) => s + (useSize ? (r.size ?? 0) : r.count), 0);
       const p = isPaginatedShared ? sharedPage : page;
       const ps = isPaginatedShared ? sharedPageSize : pageSize;
       const start = (p - 1) * ps;
@@ -235,9 +235,9 @@ export class Reports {
         columns,
         rows: paginatedRows.map(r => ({
           ...r,
-          percent: total ? Math.round(((useSize ? (r.size ?? 0) : r.count) / total) * 100) : 0,
+          percent: totalSum ? Math.round(((useSize ? (r.size ?? 0) : r.count) / totalSum) * 100) : 0,
         })),
-        total,
+        total: rs.length,
       };
     };
 

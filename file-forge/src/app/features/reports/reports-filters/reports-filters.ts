@@ -111,4 +111,9 @@ export class ReportsFilters {
   protected hasValue(): boolean {
     return !!(this.from() || this.to() || this.userId());
   }
+
+  protected hasFilters(): boolean {
+    const cfg = this.config();
+    return cfg.dates || cfg.limit || cfg.period || cfg.users;
+  }
 }
