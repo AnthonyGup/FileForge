@@ -2,7 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LoginRequest, User } from '@app/core/models';
+import { LoginRequest, LoginResponse, RegisterRequest, User } from '@app/core/models';
 import { AuthApi } from '@app/core/api';
 
 const TOKEN_KEY = 'token';
@@ -22,15 +22,11 @@ export class Auth {
   readonly isAdmin = computed(() => this._user()?.role === 'admin');
 
   login(req: LoginRequest): Observable<User> {
-    return this.api.login(req).pipe(
-      map(res => {
-        localStorage.setItem(TOKEN_KEY, res.token);
-        localStorage.setItem(USER_KEY, JSON.stringify(res.user));
-        this._token.set(res.token);
-        this._user.set(res.user);
-        return res.user;
-      })
-    );
+    return this.api.login(req).pipe(map(res => this.store(res)));
+  }
+
+  register(req: RegisterRequest): Observable<User> {
+    return this.api.register(req).pipe(map(res => this.store(res)));
   }
 
   logout(): void {
@@ -39,6 +35,14 @@ export class Auth {
     this._token.set(null);
     this._user.set(null);
     this.router.navigate(['/login']);
+  }
+
+  private store(res: LoginResponse): User {
+    localStorage.setItem(TOKEN_KEY, res.token);
+    localStorage.setItem(USER_KEY, JSON.stringify(res.user));
+    this._token.set(res.token);
+    this._user.set(res.user);
+    return res.user;
   }
 
   private readStoredUser(): User | null {

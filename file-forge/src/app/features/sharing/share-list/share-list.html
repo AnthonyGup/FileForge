@@ -38,7 +38,7 @@
           @for (share of shares(); track share.id) {
             <tr>
               <td>
-                <span class="shares__icon" aria-hidden="true">{{ icon(share) }}</span>
+                <span class="shares__icon"><app-ui-icon [name]="icon(share)" /></span>
                 <a class="shares__name" [routerLink]="link(share)">{{ share.resourceName }}</a>
                 <span class="shares__type">{{ share.resourceType === 'folder' ? 'Carpeta' : 'Archivo' }}</span>
               </td>
@@ -51,7 +51,7 @@
                   [routerLink]="link(share)"
                   title="Abrir"
                   [attr.aria-label]="'Abrir ' + share.resourceName"
-                >↗</a>
+                ><app-ui-icon name="open" /></a>
                 @if (mode() === 'by-me') {
                   <button
                     type="button"
@@ -59,7 +59,7 @@
                     title="Gestionar acceso"
                     [attr.aria-label]="'Gestionar acceso a ' + share.resourceName"
                     (click)="openManage(share)"
-                  >👥</button>
+                  ><app-ui-icon name="share" /></button>
                 }
               </td>
             </tr>

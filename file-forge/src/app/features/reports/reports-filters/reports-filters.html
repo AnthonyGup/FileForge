@@ -1,0 +1,55 @@
+<form class="reports__filters" (submit)="$event.preventDefault(); apply()">
+  @if (config().dates) {
+    <div class="reports__filter-group">
+      <label for="report-from">Desde</label>
+      <input id="report-from" type="date" class="field" [value]="from()" (change)="onFromChange($event)" />
+    </div>
+
+    <div class="reports__filter-group">
+      <label for="report-to">Hasta</label>
+      <input id="report-to" type="date" class="field" [value]="to()" (change)="onToChange($event)" />
+    </div>
+  }
+
+  @if (config().limit) {
+    <div class="reports__filter-group">
+      <label for="report-limit">Mostrar</label>
+      <select id="report-limit" class="field" [value]="limit()" (change)="onLimitChange($event)">
+        @for (opt of limitOptions; track opt) {
+          <option [value]="opt">{{ opt }}</option>
+        }
+      </select>
+    </div>
+  }
+
+  @if (config().period) {
+    <div class="reports__filter-group">
+      <label for="report-period">Agrupar</label>
+      <select id="report-period" class="field" [value]="period()" (change)="onPeriodChange($event)">
+        @for (opt of periodOptions; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </div>
+  }
+
+  @if (config().users) {
+    <div class="reports__filter-group">
+      <label for="report-user">Usuario</label>
+      <select id="report-user" class="field" [value]="userId()" (change)="onUserChange($event)">
+        @for (u of users(); track u.id) {
+          <option [value]="u.id">{{ u.name }}</option>
+        }
+      </select>
+    </div>
+  }
+
+  <div class="reports__filter-actions">
+    <button type="submit" class="btn btn--primary">Aplicar</button>
+    <button type="button" class="btn" [disabled]="!hasValue()" (click)="clear()">Limpiar</button>
+  </div>
+</form>
+
+@if (dateError()) {
+  <p class="reports__date-error" role="alert">{{ dateError() }}</p>
+}

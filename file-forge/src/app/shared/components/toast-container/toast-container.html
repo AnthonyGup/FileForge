@@ -2,7 +2,7 @@
   @for (m of toast.messages(); track m.id) {
     <div class="toast" [attr.data-type]="m.type" role="status">
       <span>{{ m.text }}</span>
-      <button type="button" (click)="toast.dismiss(m.id)" aria-label="Cerrar">✕</button>
+      <button type="button" (click)="toast.dismiss(m.id)" aria-label="Cerrar"><app-ui-icon name="close" /></button>
     </div>
   }
 </div>

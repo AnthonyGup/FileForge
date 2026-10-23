@@ -1,6 +1,5 @@
 <main class="login">
-  <form class="login__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
-    <h1 class="login__title">Gestor Documental</h1>
+  <form class="login__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>    <h1 class="login__title">Gestor Documental</h1>
     <p class="login__subtitle">Inicia sesión para continuar</p>
 
     @if (error()) {
@@ -47,5 +46,9 @@
         }
       </div>
     </div>
+
+    <p class="login__link">
+      ¿No tienes cuenta? <a routerLink="/register">Regístrate</a>
+    </p>
   </form>
 </main>

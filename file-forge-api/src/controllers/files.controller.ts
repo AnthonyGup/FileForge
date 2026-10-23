@@ -65,3 +65,8 @@ export async function updateFileController(req: Request, res: Response): Promise
   const data = parse(updateFileSchema, req.body);
   res.json(await filesService.updateFile(paramId(req), data, currentUser(req)));
 }
+
+export async function deleteFileController(req: Request, res: Response): Promise<void> {
+  await filesService.deleteFile(paramId(req), currentUser(req));
+  res.status(204).end();
+}

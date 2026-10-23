@@ -10,6 +10,8 @@ import { Toast } from '@app/core/services/toast';
 import { ConfirmDialog } from '@app/shared/components/confirm-dialog/confirm-dialog';
 import { FileSizePipe } from '@app/shared/pipes/file-size-pipe';
 import { MarkdownPipe } from '@app/shared/pipes/markdown-pipe';
+import { fileIcon, UiIconName } from '@app/shared/icons/ui-icons';
+import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 import { FileComments } from '../file-comments/file-comments';
 import { catchError, forkJoin, of, switchMap, tap } from 'rxjs';
 
@@ -18,7 +20,7 @@ type DiscardIntent = 'cancel' | 'leave' | null;
 
 @Component({
   selector: 'app-file-viewer',
-  imports: [DatePipe, UpperCasePipe, FileSizePipe, MarkdownPipe, ConfirmDialog, RouterLink, FileComments],
+  imports: [DatePipe, UpperCasePipe, FileSizePipe, MarkdownPipe, ConfirmDialog, RouterLink, FileComments, UiIcon],
   templateUrl: './file-viewer.html',
   styleUrl: './file-viewer.scss'
 })
@@ -84,8 +86,8 @@ export class FileViewer {
       });
   }
 
-  protected icon(file: FileItem): string {
-    return file.extension === 'md' ? '📝' : '📄';
+  protected icon(file: FileItem): UiIconName {
+    return fileIcon(file.extension);
   }
 
   protected startEdit(): void {

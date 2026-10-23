@@ -33,3 +33,9 @@ export async function updateFolderController(req: Request, res: Response): Promi
     const data = parse(updateFolderSchema, req.body);
     res.json(await foldersService.updateFolder(id, data, currentUser(req)));
 }
+
+export async function deleteFolderController(req: Request, res: Response): Promise<void> {
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    await foldersService.deleteFolder(id, currentUser(req));
+    res.status(204).end();
+}

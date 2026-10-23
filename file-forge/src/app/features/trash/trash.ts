@@ -7,10 +7,12 @@ import { TrashApi } from '@app/core/api';
 import { Toast } from '@app/core/services/toast';
 import { ConfirmDialog } from '@app/shared/components/confirm-dialog/confirm-dialog';
 import { FileSizePipe } from '@app/shared/pipes/file-size-pipe';
+import { resourceIcon, UiIconName } from '@app/shared/icons/ui-icons';
+import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 
 @Component({
   selector: 'app-trash',
-  imports: [DatePipe, FileSizePipe, ConfirmDialog],
+  imports: [DatePipe, FileSizePipe, ConfirmDialog, UiIcon],
   templateUrl: './trash.html',
   styleUrl: './trash.scss',
 })
@@ -58,8 +60,8 @@ export class Trash {
     this.refreshTick.update(v => v + 1);
   }
 
-  protected icon(item: TrashItem): string {
-    return item.type === 'folder' ? '📁' : '📄';
+  protected icon(item: TrashItem): UiIconName {
+    return resourceIcon(item.type);
   }
 
   protected restore(item: TrashItem): void {

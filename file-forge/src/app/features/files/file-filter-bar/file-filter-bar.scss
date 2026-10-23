@@ -4,7 +4,7 @@
   align-items: flex-end;
   gap: 0.75rem;
   padding: 0.75rem;
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 10px;
 }
@@ -20,7 +20,7 @@
   flex-direction: column;
   gap: 0.2rem;
   font-size: 0.8rem;
-  color: #64748b;
+  color: var(--color-muted);
 }
 
 .filters input,
@@ -29,7 +29,7 @@
   border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 0.9rem;
-  background: #fff;
+  background: var(--color-surface);
   color: var(--color-text);
 
   &:focus { outline: 2px solid var(--color-primary); }

@@ -6,7 +6,7 @@
         [routerLink]="item.route"
         routerLinkActive="sidebar__link--active"
       >
-        <span class="sidebar__icon">{{ item.icon }}</span>
+        <span class="sidebar__icon"><app-ui-icon [name]="item.icon" /></span>
         <span>{{ item.label }}</span>
       </a>
     }

@@ -13,7 +13,7 @@
   &:hover { text-decoration: underline; }
 }
 
-.breadcrumbs__sep { color: #94a3b8; }
+.breadcrumbs__sep { color: var(--color-faint); }
 
 .breadcrumbs__current {
   font-weight: 600;

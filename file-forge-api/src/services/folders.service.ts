@@ -1,10 +1,10 @@
 import { Types } from 'mongoose';
-import { Folder, FolderDoc, UserDoc } from '../models';
+import { File, Folder, FolderDoc, UserDoc } from '../models';
 import { CreateFolderInput, UpdateFolderInput } from '../schemas/folder.schemas';
 import { HttpError } from '../utils/http-error';
 import { isDuplicateKey } from '../utils/mongo-errors';
 import { folderRef, logActivity } from './activity.service';
-import { assertFolderAccess } from './permission.service';
+import { assertFolderAccess, assertFolderOwner } from './permission.service';
 
 export interface BreadcrumbItem {
     id: string | null;
@@ -200,9 +200,31 @@ export async function updateFolder(id: string, data: UpdateFolderInput, user: Us
     if (nameChanged) {
         await logActivity({ user, action: 'rename', resource, details: { from: previousName, to: newName } });
     }
-    if (parentChanged) {
-        await logActivity({ user, action: 'move', resource, details: { from: previousParentId, to: newParentId } });
-    }
+  if (parentChanged) {
+    await logActivity({ user, action: 'move', resource, details: { from: previousParentId, to: newParentId } });
+  }
 
-    return folder;
+  return folder;
+}
+
+export async function deleteFolder(id: string, user: UserDoc): Promise<void> {
+  const folder = await assertFolderOwner(id, user);
+  const now = new Date();
+
+  const subtree = await Folder.find({
+    deleted: false,
+    $or: [{ _id: folder._id }, { ancestors: folder._id }]
+  }).select('_id');
+  const folderIds = subtree.map(f => f._id);
+
+  await Folder.updateMany(
+    { _id: { $in: folderIds } },
+    { $set: { deleted: true, deletedAt: now, deletedRootId: folder._id } }
+  );
+  await File.updateMany(
+    { folderId: { $in: folderIds }, deleted: false },
+    { $set: { deleted: true, deletedAt: now, deletedRootId: folder._id } }
+  );
+
+  await logActivity({ user, action: 'delete', resource: folderRef(folder) });
 }

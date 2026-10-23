@@ -13,6 +13,8 @@ import { MoveDialog } from '@app/shared/components/move-dialog/move-dialog';
 import { Pagination } from '@app/shared/components/pagination/pagination';
 import { ShareDialog } from '@app/shared/components/share-dialog/share-dialog';
 import { FileSizePipe } from '@app/shared/pipes/file-size-pipe';
+import { fileIcon, UiIconName } from '@app/shared/icons/ui-icons';
+import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 import { FileRenameDialog } from '../file-rename-dialog/file-rename-dialog';
 import { DEFAULT_FILTERS, FileFilterBar, FileFilterState } from '../file-filter-bar/file-filter-bar';
 
@@ -21,7 +23,7 @@ type SortDir = NonNullable<FileFilters['sortDir']>;
 
 @Component({
   selector: 'app-file-list',
-  imports: [DatePipe, UpperCasePipe, RouterLink, Pagination, FileSizePipe, ConfirmDialog, MoveDialog, FileRenameDialog, FileFilterBar, ShareDialog],
+  imports: [DatePipe, UpperCasePipe, RouterLink, Pagination, FileSizePipe, ConfirmDialog, MoveDialog, FileRenameDialog, FileFilterBar, ShareDialog, UiIcon],
   templateUrl: './file-list.html',
   styleUrl: './file-list.scss'
 })
@@ -171,9 +173,9 @@ export class FileList {
     return file.folderId !== null || file.ownerId === this.meId();
   }
 
-  protected sortIndicator(field: SortField): string {
-    if (this.sortBy() !== field) return '';
-    return this.sortDir() === 'asc' ? '▲' : '▼';
+  protected sortIndicator(field: SortField): UiIconName | null {
+    if (this.sortBy() !== field) return null;
+    return this.sortDir() === 'asc' ? 'sortAsc' : 'sortDesc';
   }
 
   protected ariaSort(field: SortField): 'ascending' | 'descending' | 'none' {
@@ -181,8 +183,8 @@ export class FileList {
     return this.sortDir() === 'asc' ? 'ascending' : 'descending';
   }
 
-  protected icon(file: FileItem): string {
-    return file.extension === 'md' ? '📝' : '📄';
+  protected icon(file: FileItem): UiIconName {
+    return fileIcon(file.extension);
   }
 
   // ---------- Subida ----------

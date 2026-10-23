@@ -34,16 +34,16 @@
 .explorer__state {
   padding: 2rem 1rem;
   text-align: center;
-  color: #64748b;
-  background: #fff;
+  color: var(--color-muted);
+  background: var(--color-surface);
   border: 1px dashed var(--color-border);
   border-radius: 12px;
 }
 
 .explorer__state--error {
-  color: #991b1b;
-  background: #fef2f2;
-  border-color: #fecaca;
+  color: var(--color-danger-text);
+  background: var(--color-danger-bg);
+  border-color: var(--color-danger-border);
 }
 
 .explorer__actions {
@@ -73,7 +73,7 @@
   column-gap: 0.75rem;
   align-items: center;
   padding: 0.75rem 1rem;
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 10px;
   color: var(--color-text);
@@ -82,7 +82,7 @@
 
   &:hover {
     border-color: var(--color-primary);
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+    box-shadow: 0 2px 8px rgba(31, 138, 140, 0.12);
   }
 }
 
@@ -99,7 +99,7 @@
 .folder-card__date {
   grid-area: date;
   font-size: 0.78rem;
-  color: #64748b;
+  color: var(--color-muted);
 }
 
 .folder-item {
@@ -120,13 +120,13 @@
 
   button {
     padding: 0.2rem 0.35rem;
-    background: #fff;
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 6px;
     font-size: 0.8rem;
     cursor: pointer;
 
-    &:hover { background: #f1f5f9; }
+    &:hover { background: var(--color-hover); }
   }
 }
 

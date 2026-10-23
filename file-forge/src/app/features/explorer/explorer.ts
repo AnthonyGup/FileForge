@@ -11,6 +11,7 @@ import { Breadcrumbs } from '@app/shared/components/breadcrumbs/breadcrumbs';
 import { ConfirmDialog } from '@app/shared/components/confirm-dialog/confirm-dialog';
 import { MoveDialog } from '@app/shared/components/move-dialog/move-dialog';
 import { ShareDialog } from '@app/shared/components/share-dialog/share-dialog';
+import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 import { FileList } from '@app/features/files/file-list/file-list';
 import { FolderNameDialog } from './folder-name-dialog/folder-name-dialog';
 
@@ -18,7 +19,7 @@ const ROOT: BreadcrumbItem = { id: null, name: 'Mis archivos' };
 
 @Component({
   selector: 'app-explorer',
-  imports: [DatePipe, RouterLink, Breadcrumbs, ConfirmDialog, FolderNameDialog, MoveDialog, ShareDialog, FileList],
+  imports: [DatePipe, RouterLink, Breadcrumbs, ConfirmDialog, FolderNameDialog, MoveDialog, ShareDialog, FileList, UiIcon],
   templateUrl: './explorer.html',
   styleUrl: './explorer.scss'
 })

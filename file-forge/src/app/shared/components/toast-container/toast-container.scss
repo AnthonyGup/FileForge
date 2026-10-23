@@ -17,12 +17,12 @@
   min-width: 260px;
   padding: 0.7rem 1rem;
   border-radius: 8px;
-  background: #0f172a;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: var(--color-text);
+  color: var(--color-surface);
+  box-shadow: 0 4px 12px rgba(59, 46, 38, 0.2);
 
-  &[data-type='success'] { background: #166534; }
-  &[data-type='error']   { background: #991b1b; }
+  &[data-type='success'] { background: var(--color-success-text); }
+  &[data-type='error']   { background: var(--color-danger-text); }
 
   button {
     background: none;

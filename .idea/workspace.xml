@@ -5,8 +5,166 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6ac2ab8-e4c7-4284-9ef6-8615e4e9af6c" name="Changes" comment="feat: layout con navbar, sidebar y shell">
-      <change afterPath="$PROJECT_DIR$/file-forge-api/src/config/db.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/activity.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/comments.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/reports.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/shares.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/trash.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/models/report.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/routes/activity.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/routes/comments.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/routes/reports.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/routes/shares.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/routes/trash.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/schemas/activity.schemas.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/schemas/comment.schemas.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/schemas/report.schemas.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/schemas/share.schemas.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/services/comments.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/services/reports.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/services/shares.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/services/trash.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge-api/src/utils/date-range.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/features/auth/register/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/features/auth/register/register.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/features/auth/register/register.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports-filters/reports-filters.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports-filters/reports-filters.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports-filters/reports-filters.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports-table/reports-table.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports-table/reports-table.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports-table/reports-table.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/shared/icons/ui-icon/ui-icon.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/shared/icons/ui-icon/ui-icon.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/shared/icons/ui-icon/ui-icon.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file-forge/src/app/shared/icons/ui-icons.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/controllers/files.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/files.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/controllers/folders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/controllers/folders.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/routes/auth.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/routes/auth.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/routes/files.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/routes/files.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/routes/folders.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/routes/folders.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/routes/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/schemas/auth.schemas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/schemas/auth.schemas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/scripts/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/scripts/seed.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/services/activity.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/services/activity.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/services/files.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/services/files.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge-api/src/services/folders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge-api/src/services/folders.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/app.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/api.providers.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/api.providers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/api/api.providers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/auth.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/api/auth.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/http/http-api.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/http/http-auth.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/api/http/http-auth.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/http/http-report.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/api/http/http-report.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/mock-activity.api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/mock-auth.api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/mock-comment.api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/mock-file.api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/mock-folder.api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/mock-report.api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/mock-share.api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/mock-trash.api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/mock/mock-user.api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/api/report.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/api/report.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/mock/mock-data.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/mock/mock-db.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/mock/mock-utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/models/report.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/models/report.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/models/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/models/user.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/services/auth.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/services/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/core/services/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/services/file-transfer.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/services/layout.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/core/services/toast.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/activity/activity.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/activity/activity.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/activity/activity.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/activity/activity.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/activity/activity.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/activity/activity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/activity/activity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/admin/admin.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/admin/admin.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/admin/admin.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/auth/login/login.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/explorer/explorer.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/explorer/explorer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/explorer/explorer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/explorer/explorer.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/explorer/explorer.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/explorer/explorer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/explorer/explorer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/explorer/folder-name-dialog/folder-name-dialog.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-comments/file-comments.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-comments/file-comments.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-comments/file-comments.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-filter-bar/file-filter-bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-filter-bar/file-filter-bar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-filter-bar/file-filter-bar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-filter-bar/file-filter-bar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-filter-bar/file-filter-bar.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-list/file-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-list/file-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-list/file-list.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-list/file-list.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-list/file-list.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-list/file-list.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-list/file-list.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-rename-dialog/file-rename-dialog.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-rename-dialog/file-rename-dialog.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-rename-dialog/file-rename-dialog.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/files/file-viewer/file-viewer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/reports/reports.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/sharing/share-list/share-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/sharing/share-list/share-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/sharing/share-list/share-list.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/sharing/share-list/share-list.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/sharing/share-list/share-list.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/sharing/share-list/share-list.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/sharing/share-list/share-list.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/sharing/shared-by-me/shared-by-me.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/sharing/shared-with-me/shared-with-me.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/trash/trash.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/trash/trash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/trash/trash.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/trash/trash.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/trash/trash.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/features/trash/trash.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/features/trash/trash.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/navbar/navbar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/shell/shell.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/shell/shell.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/shell/shell.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/layout/sidebar/sidebar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/breadcrumbs/breadcrumbs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/breadcrumbs/breadcrumbs.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/breadcrumbs/breadcrumbs.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/confirm-dialog/confirm-dialog.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/dialog/dialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/dialog/dialog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/dialog/dialog.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/dialog/dialog.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/dialog/dialog.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/dialog/dialog.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/dialog/dialog.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/move-dialog/move-dialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/move-dialog/move-dialog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/move-dialog/move-dialog.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/move-dialog/move-dialog.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/move-dialog/move-dialog.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/move-dialog/move-dialog.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/move-dialog/move-dialog.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/pagination/pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/pagination/pagination.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/pagination/pagination.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/share-dialog/share-dialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/share-dialog/share-dialog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/share-dialog/share-dialog.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/share-dialog/share-dialog.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/share-dialog/share-dialog.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/share-dialog/share-dialog.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/share-dialog/share-dialog.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/toast-container/toast-container.html" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/toast-container/toast-container.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/toast-container/toast-container.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/toast-container/toast-container.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/toast-container/toast-container.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/components/toast-container/toast-container.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/app/shared/components/toast-container/toast-container.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/pipes/file-size-pipe.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/app/shared/pipes/markdown-pipe.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/environments/environment.development.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/environments/environment.development.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/environments/environment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/file-forge/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/src/test-setup.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-forge/tsconfig.spec.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +262,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "backend/db/connection",
+    "git-widget-placeholder": "backend/files",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",

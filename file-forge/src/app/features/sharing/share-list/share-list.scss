@@ -19,15 +19,15 @@
 
 .shares__subtitle {
   margin: 0.25rem 0 0;
-  color: #64748b;
+  color: var(--color-muted);
   font-size: 0.9rem;
 }
 
 .shares__state {
   padding: 2rem 1rem;
   text-align: center;
-  color: #64748b;
-  background: #fff;
+  color: var(--color-muted);
+  background: var(--color-surface);
   border: 1px dashed var(--color-border);
   border-radius: 12px;
 
@@ -38,13 +38,13 @@
 }
 
 .shares__state--error {
-  color: #991b1b;
-  border-color: #fca5a5;
+  color: var(--color-danger-text);
+  border-color: var(--color-danger-border);
 }
 
 .shares__wrap {
   overflow-x: auto;
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
 }
@@ -65,8 +65,8 @@
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    color: #64748b;
-    background: #f8fafc;
+    color: var(--color-muted);
+    background: var(--color-surface-2);
   }
 
   tbody tr:last-child td {
@@ -84,7 +84,7 @@
 
 .shares__type {
   display: block;
-  color: #94a3b8;
+  color: var(--color-faint);
   font-size: 0.78rem;
 }
 
@@ -92,7 +92,7 @@
   display: inline-block;
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
-  background: #e2e8f0;
+  background: var(--color-border);
   font-size: 0.8rem;
   white-space: nowrap;
 }

@@ -6,12 +6,14 @@ import { catchError, of, switchMap, tap } from 'rxjs';
 import { ApiError, ShareView } from '@app/core/models';
 import { ShareApi } from '@app/core/api';
 import { PERMISSION_LABELS, ShareDialog } from '@app/shared/components/share-dialog/share-dialog';
+import { resourceIcon, UiIconName } from '@app/shared/icons/ui-icons';
+import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 
 export type ShareMode = 'by-me' | 'with-me';
 
 @Component({
   selector: 'app-share-list',
-  imports: [DatePipe, RouterLink, ShareDialog],
+  imports: [DatePipe, RouterLink, ShareDialog, UiIcon],
   templateUrl: './share-list.html',
   styleUrl: './share-list.scss'
 })
@@ -63,8 +65,8 @@ export class ShareList {
     this.refreshTick.update(v => v + 1);
   }
 
-  protected icon(share: ShareView): string {
-    return share.resourceType === 'folder' ? '📁' : '📄';
+  protected icon(share: ShareView): UiIconName {
+    return resourceIcon(share.resourceType);
   }
 
   protected link(share: ShareView): string[] {

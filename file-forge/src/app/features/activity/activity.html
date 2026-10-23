@@ -8,6 +8,23 @@
   </header>
 
   <div class="activity__filters">
+    @if (isAdmin()) {
+      <div class="activity__filter-group">
+        <label for="filter-user">Usuario</label>
+        <select
+          id="filter-user"
+          class="field"
+          [value]="filters().userId || ''"
+          (change)="onUserChange($event)"
+        >
+          <option value="">Todos</option>
+          @for (u of userOptions(); track u.id) {
+            <option [value]="u.id">{{ u.name }}</option>
+          }
+        </select>
+      </div>
+    }
+
     <div class="activity__filter-group">
       <label for="filter-action">Acción</label>
       <select
@@ -89,7 +106,7 @@
               <td>{{ item.user.name }}</td>
               <td>
                 <span class="activity__action">
-                  <span aria-hidden="true">{{ actionIcon(item.action) }}</span>
+                  <app-ui-icon [name]="actionIcon(item.action)" />
                   {{ actionLabel(item.action) }}
                 </span>
               </td>

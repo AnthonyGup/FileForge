@@ -15,7 +15,7 @@ import { deleteContent, readContent, uploadContent } from '../utils/gridfs';
 import { HttpError } from '../utils/http-error';
 import { isDuplicateKey } from '../utils/mongo-errors';
 import { fileRef, logActivity } from './activity.service';
-import { assertFileAccess, assertFolderAccess } from './permission.service';
+import { assertFileAccess, assertFileOwner, assertFolderAccess } from './permission.service';
 
 const EXTENSION_RE = /\.(txt|md)$/i;
 const NAME_COLLATION = { locale: 'es', strength: 2 };
@@ -297,4 +297,15 @@ export async function updateFile(id: string, data: UpdateFileInput, user: UserDo
   }
 
   return file;
+}
+
+export async function deleteFile(id: string, user: UserDoc): Promise<void> {
+  const file = await assertFileOwner(id, user);
+
+  file.deleted = true;
+  file.deletedAt = new Date();
+  file.deletedRootId = file._id;
+  await file.save();
+
+  await logActivity({ user, action: 'delete', resource: fileRef(file) });
 }

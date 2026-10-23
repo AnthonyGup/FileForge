@@ -65,7 +65,7 @@
                 [disabled]="busy()"
                 (click)="revoke(share)"
               >
-                {{ revokingId() === share.id ? '⏳' : '🗑️' }}
+                <app-ui-icon [name]="revokingId() === share.id ? 'loading' : 'delete'" />
               </button>
             </li>
           }

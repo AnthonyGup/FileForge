@@ -37,10 +37,10 @@
 .share__state {
   margin: 0;
   padding: 0.5rem 0;
-  color: #64748b;
+  color: var(--color-muted);
 }
 
-.share__state--error { color: #991b1b; }
+.share__state--error { color: var(--color-danger-text); }
 
 @media (max-width: 520px) {
   .share__add {

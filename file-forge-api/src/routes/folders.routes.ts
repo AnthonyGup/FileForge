@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
     breadcrumbController,
     createFolderController,
+    deleteFolderController,
     getFolderController,
     listFoldersController,
     rootBreadcrumbController,
@@ -19,3 +20,4 @@ foldersRouter.post('/', createFolderController);
 foldersRouter.get('/:id', getFolderController);
 foldersRouter.get('/:id/breadcrumb', breadcrumbController);
 foldersRouter.patch('/:id', updateFolderController);
+foldersRouter.delete('/:id', deleteFolderController);

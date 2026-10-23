@@ -21,7 +21,7 @@
         @if (progress(); as p) {
           Subiendo {{ p.done }}/{{ p.total }}...
         } @else {
-          ⬆ Subir archivo
+          <app-ui-icon name="upload" /> Subir archivo
         }
       </button>
     }
@@ -60,17 +60,17 @@
         <thead>
           <tr>
             <th [attr.aria-sort]="ariaSort('name')">
-              <button type="button" (click)="toggleSort('name')">Nombre {{ sortIndicator('name') }}</button>
+              <button type="button" (click)="toggleSort('name')">Nombre @if (sortIndicator('name'); as ic) {<app-ui-icon [name]="ic" />}</button>
             </th>
             <th>Tipo</th>
             <th [attr.aria-sort]="ariaSort('size')" class="num">
-              <button type="button" (click)="toggleSort('size')">Tamaño {{ sortIndicator('size') }}</button>
+              <button type="button" (click)="toggleSort('size')">Tamaño @if (sortIndicator('size'); as ic) {<app-ui-icon [name]="ic" />}</button>
             </th>
             <th [attr.aria-sort]="ariaSort('createdAt')" class="hide-sm">
-              <button type="button" (click)="toggleSort('createdAt')">Creado {{ sortIndicator('createdAt') }}</button>
+              <button type="button" (click)="toggleSort('createdAt')">Creado @if (sortIndicator('createdAt'); as ic) {<app-ui-icon [name]="ic" />}</button>
             </th>
             <th [attr.aria-sort]="ariaSort('updatedAt')">
-              <button type="button" (click)="toggleSort('updatedAt')">Modificado {{ sortIndicator('updatedAt') }}</button>
+              <button type="button" (click)="toggleSort('updatedAt')">Modificado @if (sortIndicator('updatedAt'); as ic) {<app-ui-icon [name]="ic" />}</button>
             </th>
             <th class="actions"><span class="sr-only">Acciones</span></th>
           </tr>
@@ -79,7 +79,7 @@
           @for (file of files(); track file.id) {
             <tr>
               <td class="name">
-                <span aria-hidden="true">{{ icon(file) }}</span>
+                <app-ui-icon [name]="icon(file)" />
                 <a class="name__text" [title]="file.name" [routerLink]="['/file', file.id]">{{ file.name }}</a>
               </td>
               <td><span class="badge">{{ file.extension | uppercase }}</span></td>
@@ -89,7 +89,7 @@
               <td class="actions">
                 @if (scopeAll() && canOpenLocation(file)) {
                   <a class="icon-btn" title="Abrir carpeta contenedora" [routerLink]="locationLink(file)"
-                     [attr.aria-label]="'Abrir la carpeta de ' + file.name">📍</a>
+                     [attr.aria-label]="'Abrir la carpeta de ' + file.name"><app-ui-icon name="open" /></a>
                 }
 
                 <button
@@ -100,14 +100,14 @@
                   [disabled]="downloadingId() !== null"
                   (click)="download(file)"
                 >
-                  {{ downloadingId() === file.id ? '⏳' : '⬇' }}
+                  <app-ui-icon [name]="downloadingId() === file.id ? 'loading' : 'download'" />
                 </button>
 
                 @if (file.ownerId === meId()) {
-                  <button type="button" class="icon-btn" title="Compartir" [attr.aria-label]="'Compartir ' + file.name" (click)="openShare(file)">👥</button>
-                  <button type="button" class="icon-btn" title="Renombrar" [attr.aria-label]="'Renombrar ' + file.name" (click)="openRename(file)">✏️</button>
-                  <button type="button" class="icon-btn" title="Mover" [attr.aria-label]="'Mover ' + file.name" (click)="openMove(file)">📂</button>
-                  <button type="button" class="icon-btn" title="Eliminar" [attr.aria-label]="'Eliminar ' + file.name" (click)="openDelete(file)">🗑️</button>
+                  <button type="button" class="icon-btn" title="Compartir" [attr.aria-label]="'Compartir ' + file.name" (click)="openShare(file)"><app-ui-icon name="share" /></button>
+                  <button type="button" class="icon-btn" title="Renombrar" [attr.aria-label]="'Renombrar ' + file.name" (click)="openRename(file)"><app-ui-icon name="rename" /></button>
+                  <button type="button" class="icon-btn" title="Mover" [attr.aria-label]="'Mover ' + file.name" (click)="openMove(file)"><app-ui-icon name="move" /></button>
+                  <button type="button" class="icon-btn" title="Eliminar" [attr.aria-label]="'Eliminar ' + file.name" (click)="openDelete(file)"><app-ui-icon name="delete" /></button>
                 }
               </td>
             </tr>

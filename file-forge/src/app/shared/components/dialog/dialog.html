@@ -2,7 +2,7 @@
   <div class="dialog__panel">
     <header class="dialog__header">
       <h2>{{ title() }}</h2>
-      <button type="button" (click)="closed.emit()" aria-label="Cerrar">✕</button>
+      <button type="button" (click)="closed.emit()" aria-label="Cerrar"><app-ui-icon name="close" /></button>
     </header>
     <div class="dialog__body">
       <ng-content />

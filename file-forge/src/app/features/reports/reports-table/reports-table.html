@@ -1,0 +1,63 @@
+@if (error()) {
+  <div class="reports__state reports__state--error">
+    <p>{{ error() }}</p>
+  </div>
+} @else if (loading()) {
+  <p class="reports__state">Cargando reporte…</p>
+} @else if (empty()) {
+  <p class="reports__state">No hay datos que coincidan con los filtros.</p>
+} @else {
+  <div class="reports__wrap">
+    <table class="reports__table">
+      <thead>
+        <tr>
+          @for (col of columns(); track col.field) {
+            <th [class.reports__num]="isNum(col)">{{ col.label }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows(); track row.key) {
+          <tr>
+            @for (col of columns(); track col.field) {
+              @if (col.type === 'bar') {
+                <td>
+                  <div class="reports__bar" role="img" [attr.aria-label]="percent(row) + '%'">
+                    <span class="reports__bar-fill" [style.width]="barWidth(row)"></span>
+                    <span class="reports__bar-label">{{ percent(row) }}%</span>
+                  </div>
+                </td>
+              } @else {
+                <td
+                  [class.reports__num]="isNum(col)"
+                  [class.reports__type]="col.field === 'label'"
+                  [class.reports__sub]="col.field === 'sublabel'"
+                >
+                  @switch (col.type) {
+                    @case ('date') { {{ display(row, col) | date: 'dd/MM/yyyy' }} }
+                    @case ('size') { {{ sizeOf(row) | fileSize }} }
+                    @default { {{ display(row, col) }} }
+                  }
+                </td>
+              }
+            }
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          @for (col of columns().slice(1); track col.field) {
+            @if (col.type === 'count') {
+              <td class="reports__num">{{ totalCount() }}</td>
+            } @else if (col.type === 'size') {
+              <td class="reports__num">{{ totalSize() | fileSize }}</td>
+            } @else {
+              <td></td>
+            }
+          }
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+}

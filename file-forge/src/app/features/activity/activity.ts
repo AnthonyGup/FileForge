@@ -2,19 +2,29 @@ import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
-import { catchError, of, switchMap, tap } from 'rxjs';
-import { ApiError, ACTIVITY_LABELS, Activity as ActivityModel, ActivityAction, ActivityFilters, Page } from '@app/core/models';
-import { ActivityApi } from '@app/core/api';
+import { catchError, first, of, switchMap, tap } from 'rxjs';
+import {
+  ApiError, ACTIVITY_LABELS, Activity as ActivityModel, ActivityAction, ActivityFilters, Page, User,
+} from '@app/core/models';
+import { ActivityApi, UserApi } from '@app/core/api';
+import { Auth } from '@app/core/services/auth';
 import { Pagination } from '@app/shared/components/pagination/pagination';
+import { UiIconName } from '@app/shared/icons/ui-icons';
+import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 
 @Component({
   selector: 'app-activity',
-  imports: [DatePipe, RouterLink, Pagination],
+  imports: [DatePipe, RouterLink, Pagination, UiIcon],
   templateUrl: './activity.html',
   styleUrl: './activity.scss',
 })
 export class Activity {
   private readonly activityApi = inject(ActivityApi);
+  private readonly userApi = inject(UserApi);
+  private readonly auth = inject(Auth);
+
+  protected readonly isAdmin = this.auth.isAdmin;
+  protected readonly userOptions = signal<User[]>([]);
 
   protected readonly items = signal<ActivityModel[]>([]);
   protected readonly total = signal(0);
@@ -38,10 +48,17 @@ export class Activity {
   protected readonly pageSize = computed(() => this.filters().pageSize ?? 10);
   protected readonly hasActiveFilters = computed(() => {
     const f = this.filters();
-    return Boolean(f.action || f.dateFrom || f.dateTo);
+    return Boolean(f.action || f.dateFrom || f.dateTo || f.userId);
   });
 
   constructor() {
+    if (this.isAdmin()) {
+      this.userApi.list().pipe(first()).subscribe({
+        next: users => this.userOptions.set(users),
+        error: () => this.userOptions.set([]),
+      });
+    }
+
     toObservable(computed(() => ({ filters: this.filters(), tick: this.refreshTick() })))
       .pipe(
         tap(() => {
@@ -74,6 +91,11 @@ export class Activity {
     this.filters.update(f => ({ ...f, action: value || undefined, page: 1 }));
   }
 
+  protected onUserChange(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    this.filters.update(f => ({ ...f, userId: value || undefined, page: 1 }));
+  }
+
   protected onDateFromChange(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.filters.update(f => ({ ...f, dateFrom: value || undefined, page: 1 }));
@@ -86,6 +108,7 @@ export class Activity {
 
   protected clearFilters(): void {
     this.filters.set({
+      userId: undefined,
       action: undefined,
       dateFrom: undefined,
       dateTo: undefined,
@@ -102,24 +125,24 @@ export class Activity {
     this.filters.update(f => ({ ...f, pageSize, page: 1 }));
   }
 
-  protected actionIcon(action: ActivityAction): string {
-    const icons: Record<ActivityAction, string> = {
-      login: '🔐',
-      upload: '⬆',
-      download: '⬇',
-      rename: '✏️',
-      move: '📦',
-      edit: '📝',
-      delete: '🗑️',
-      restore: '♻️',
-      delete_permanent: '❌',
-      create_folder: '📁',
-      share: '👥',
-      update_share: '🔁',
-      revoke_share: '🚫',
-      comment: '💬',
+  protected actionIcon(action: ActivityAction): UiIconName {
+    const icons: Record<ActivityAction, UiIconName> = {
+      login: 'login',
+      upload: 'upload',
+      download: 'download',
+      rename: 'rename',
+      move: 'move',
+      edit: 'edit',
+      delete: 'delete',
+      restore: 'restore',
+      delete_permanent: 'deletePermanent',
+      create_folder: 'folder',
+      share: 'share',
+      update_share: 'updateShare',
+      revoke_share: 'revokeShare',
+      comment: 'comment',
     };
-    return icons[action] || '📌';
+    return icons[action] || 'activity';
   }
 
   protected actionLabel(action: ActivityAction): string {
@@ -145,7 +168,7 @@ export class Activity {
       case 'share':
         return `con ${d['sharedWith']} (${this.permissionLabel(d['permission'] as string)})`;
       case 'update_share':
-        return `${d['sharedWith']} → ${this.permissionLabel(d['permission'] as string)}`;
+        return `${d['sharedWith']} -> ${this.permissionLabel(d['permission'] as string)}`;
       case 'revoke_share':
         return `para ${d['sharedWith']}`;
       default:

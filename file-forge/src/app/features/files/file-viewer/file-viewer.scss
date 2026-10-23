@@ -37,7 +37,7 @@
   align-items: center;
   gap: 0.4rem;
   margin: 0.25rem 0 0;
-  color: #64748b;
+  color: var(--color-muted);
   font-size: 0.85rem;
 }
 
@@ -50,7 +50,7 @@
 .viewer__content {
   margin: 0;
   padding: 1.25rem;
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 10px;
 }
@@ -71,7 +71,7 @@
   font-size: 0.9rem;
   line-height: 1.6;
   color: var(--color-text);
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 10px;
   resize: vertical;
@@ -91,43 +91,43 @@
 }
 
 .viewer__count {
-  color: #64748b;
+  color: var(--color-muted);
   font-size: 0.85rem;
 }
 
 .viewer__state {
   padding: 2rem 1rem;
   text-align: center;
-  color: #64748b;
-  background: #fff;
+  color: var(--color-muted);
+  background: var(--color-surface);
   border: 1px dashed var(--color-border);
   border-radius: 10px;
 }
 
 .viewer__state--error {
-  color: #b91c1c;
-  border-color: #fecaca;
-  background: #fef2f2;
+  color: var(--color-danger-hover);
+  border-color: var(--color-danger-border);
+  background: var(--color-danger-bg);
 }
 
 .badge {
   display: inline-block;
   padding: 0.1rem 0.5rem;
   border-radius: 999px;
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-hover);
   font-size: 0.75rem;
   font-weight: 600;
 }
 
 .icon-btn {
   padding: 0.3rem 0.55rem;
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 6px;
   cursor: pointer;
 
-  &:hover:not(:disabled) { background: #f1f5f9; }
+  &:hover:not(:disabled) { background: var(--color-hover); }
   &:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 
@@ -156,7 +156,7 @@
 
   code {
     padding: 0.1rem 0.35rem;
-    background: #f1f5f9;
+    background: var(--color-hover);
     border-radius: 4px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 0.85em;
@@ -165,20 +165,20 @@
   pre {
     padding: 0.9rem;
     overflow-x: auto;
-    background: #0f172a;
+    background: var(--color-text);
     border-radius: 8px;
 
     code {
       padding: 0;
       background: none;
-      color: #e2e8f0;
+      color: var(--color-border);
     }
   }
 
   blockquote {
     margin: 0.6rem 0;
     padding: 0.3rem 0.9rem;
-    color: #475569;
+    color: var(--color-soft);
     border-left: 3px solid var(--color-border);
   }
 

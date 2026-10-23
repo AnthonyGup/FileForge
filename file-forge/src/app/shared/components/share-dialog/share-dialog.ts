@@ -5,6 +5,7 @@ import { ApiError, PermissionLevel, ResourceType, ShareView, User } from '@app/c
 import { ShareApi, UserApi } from '@app/core/api';
 import { Toast } from '@app/core/services/toast';
 import { Dialog } from '../dialog/dialog';
+import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 
 export const PERMISSIONS: PermissionLevel[] = ['read', 'comment', 'edit'];
 
@@ -16,7 +17,7 @@ export const PERMISSION_LABELS: Record<PermissionLevel, string> = {
 
 @Component({
   selector: 'app-share-dialog',
-  imports: [Dialog],
+  imports: [Dialog, UiIcon],
   templateUrl: './share-dialog.html',
   styleUrl: './share-dialog.scss'
 })

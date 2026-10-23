@@ -1,7 +1,7 @@
 .sidebar {
   width: 0;
   overflow: hidden;
-  background: #fff;
+  background: var(--color-surface);
   border-right: 1px solid var(--color-border);
   transition: width 0.2s ease;
 }
@@ -28,11 +28,11 @@
   text-decoration: none;
   white-space: nowrap;
 
-  &:hover { background: #f1f5f9; }
+  &:hover { background: var(--color-hover); }
 }
 
 .sidebar__link--active {
-  background: #dbeafe;
+  background: var(--color-primary-soft);
   color: var(--color-primary);
   font-weight: 600;
 }

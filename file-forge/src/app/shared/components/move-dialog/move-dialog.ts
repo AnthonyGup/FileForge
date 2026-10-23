@@ -4,10 +4,11 @@ import { catchError, forkJoin, of, switchMap, tap } from 'rxjs';
 import { ApiError, BreadcrumbItem, Folder } from '@app/core/models';
 import { FolderApi } from '@app/core/api';
 import { Dialog } from '../dialog/dialog';
+import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 
 @Component({
   selector: 'app-move-dialog',
-  imports: [Dialog],
+  imports: [Dialog, UiIcon],
   templateUrl: './move-dialog.html',
   styleUrl: './move-dialog.scss'
 })

@@ -23,7 +23,7 @@
       <ul>
         @for (f of folders(); track f.id) {
           <li>
-            <button type="button" (click)="go(f.id)">📁 {{ f.name }}</button>
+            <button type="button" (click)="go(f.id)"><app-ui-icon name="folder" /> {{ f.name }}</button>
           </li>
         }
       </ul>

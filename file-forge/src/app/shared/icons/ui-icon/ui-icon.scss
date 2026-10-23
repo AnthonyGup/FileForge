@@ -1,0 +1,18 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ui-icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex-shrink: 0;
+}
+
+.ui-icon--spin {
+  animation: ui-icon-spin 0.9s linear infinite;
+}
+
+@keyframes ui-icon-spin {
+  to { transform: rotate(360deg); }
+}

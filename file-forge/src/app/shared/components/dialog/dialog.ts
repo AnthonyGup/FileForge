@@ -1,7 +1,9 @@
 import { Component, ElementRef, afterNextRender, input, output, viewChild } from '@angular/core';
+import { UiIcon } from '@app/shared/icons/ui-icon/ui-icon';
 
 @Component({
   selector: 'app-dialog',
+  imports: [UiIcon],
   templateUrl: './dialog.html',
   styleUrl: './dialog.scss'
 })

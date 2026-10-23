@@ -2,7 +2,9 @@ import bcrypt from 'bcryptjs';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { env } from '../config/env';
 import { User, UserDoc } from '../models';
+import { RegisterInput } from '../schemas/auth.schemas';
 import { HttpError } from '../utils/http-error';
+import { isDuplicateKey } from '../utils/mongo-errors';
 import { logActivity } from './activity.service';
 
 /**
@@ -48,6 +50,31 @@ export async function login(email: string, password: string): Promise<{ token: s
 
     user.lastLoginAt = new Date();
     await user.save({ timestamps: false });      // no cambia updatedAt en cada login
+
+    await logActivity({ user, action: 'login' });
+
+    return { token: signToken(user), user };
+}
+
+export async function register(data: RegisterInput): Promise<{ token: string; user: UserDoc }> {
+    const passwordHash = await bcrypt.hash(data.password, 10);
+    let user: UserDoc;
+    try {
+        user = await User.create({
+            name: data.name,
+            email: data.email,
+            role: 'user',
+            passwordHash
+        });
+    } catch (err) {
+        if (isDuplicateKey(err)) {
+            throw HttpError.conflict('El email ya está registrado');
+        }
+        throw err;
+    }
+
+    user.lastLoginAt = new Date();
+    await user.save({ timestamps: false });
 
     await logActivity({ user, action: 'login' });
 

@@ -8,11 +8,11 @@
     </div>
   } @else if (file(); as f) {
     <header class="viewer__header">
-      <button type="button" class="btn" (click)="goBack()">← Volver</button>
+      <button type="button" class="btn" (click)="goBack()"><app-ui-icon name="back" /> Volver</button>
 
       <div class="viewer__meta">
         <h2 class="viewer__title">
-          <span aria-hidden="true">{{ icon(f) }}</span>
+          <app-ui-icon [name]="icon(f)" />
           <span class="viewer__name">{{ f.name }}</span>
         </h2>
         <p class="viewer__subtitle">
@@ -32,11 +32,11 @@
           [disabled]="downloading()"
           (click)="download()"
         >
-          {{ downloading() ? '⏳' : '⬇' }}
+          <app-ui-icon [name]="downloading() ? 'loading' : 'download'" />
         </button>
 
         @if (mode() === 'view') {
-          <button type="button" class="btn btn--primary" (click)="startEdit()">✏️ Editar</button>
+          <button type="button" class="btn btn--primary" (click)="startEdit()"><app-ui-icon name="edit" /> Editar</button>
         }
       </div>
     </header>

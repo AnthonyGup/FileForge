@@ -1,8 +1,36 @@
 :root {
-  --color-primary: #2563eb;
-  --color-bg: #f8fafc;
-  --color-text: #0f172a;
-  --color-border: #e2e8f0;
+  --color-bg: #f4efe3;
+  --color-surface: #fbf7ec;
+  --color-surface-2: #efe7d6;
+  --color-hover: #efe7d6;
+  --color-border: #e0d6c4;
+  --color-border-soft: #eae1d0;
+
+  --color-text: #3b2e26;
+  --color-muted: #6b5a4e;
+  --color-soft: #8c7a6b;
+  --color-faint: #a99887;
+
+  --color-primary: #1f8a8c;
+  --color-primary-hover: #176f72;
+  --color-primary-soft: #d6ecec;
+  --color-on-primary: #ffffff;
+
+  --color-accent: #c08a2e;
+
+  --color-success: #4e9a63;
+  --color-success-text: #2f6b44;
+  --color-success-bg: #e6f2ea;
+  --color-success-border: #bfdec9;
+
+  --color-danger: #b4553a;
+  --color-danger-hover: #94452f;
+  --color-danger-text: #8a3d25;
+  --color-danger-bg: #f7e7e2;
+  --color-danger-border: #e8c4b8;
+
+  --color-overlay: rgba(59, 46, 38, 0.45);
+  --font-mono: ui-monospace, 'Cascadia Code', Consolas, 'SFMono-Regular', Menlo, monospace;
 }
 
 * {
@@ -22,29 +50,29 @@ body {
 .btn {
   padding: 0.5rem 1rem;
   border: 1px solid var(--color-border);
-  background: #fff;
+  background: var(--color-surface);
   border-radius: 8px;
   font-size: 0.95rem;
   cursor: pointer;
 
-  &:hover:not(:disabled) { background: #f1f5f9; }
+  &:hover:not(:disabled) { background: var(--color-hover); }
   &:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 
 .btn--primary {
   background: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
 
-  &:hover:not(:disabled) { background: #1d4ed8; }
+  &:hover:not(:disabled) { background: var(--color-primary-hover); }
 }
 
 .btn--danger {
-  background: #dc2626;
-  border-color: #dc2626;
-  color: #fff;
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: var(--color-on-primary);
 
-  &:hover:not(:disabled) { background: #b91c1c; }
+  &:hover:not(:disabled) { background: var(--color-danger-hover); }
 }
 
 /* ---------- Formularios ---------- */
@@ -59,19 +87,21 @@ body {
     border: 1px solid var(--color-border);
     border-radius: 8px;
     font-size: 1rem;
+    background: var(--color-surface);
+    color: var(--color-text);
 
     &:focus { outline: 2px solid var(--color-primary); }
-    &.ng-touched.ng-invalid { border-color: #dc2626; }
+    &.ng-touched.ng-invalid { border-color: var(--color-danger); }
   }
 }
 
-.field-error { color: #dc2626; font-size: 0.85rem; }
+.field-error { color: var(--color-danger-text); font-size: 0.85rem; }
 
 .form-alert {
   padding: 0.6rem 0.75rem;
   border-radius: 8px;
-  background: #fee2e2;
-  color: #991b1b;
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
   font-size: 0.9rem;
 }
 

@@ -4,10 +4,10 @@
 
     <div class="explorer__toolbar">
       @if (parentLink(); as link) {
-        <a class="explorer__back" [routerLink]="link">← Subir un nivel</a>
+        <a class="explorer__back" [routerLink]="link"><app-ui-icon name="back" /> Subir un nivel</a>
       }
       @if (!loading() && !error() && canManageCurrent()) {
-        <button type="button" class="btn btn--primary" (click)="openCreate()">＋ Nueva carpeta</button>
+        <button type="button" class="btn btn--primary" (click)="openCreate()"><app-ui-icon name="folder" /> Nueva carpeta</button>
       }
     </div>
   </header>
@@ -32,17 +32,17 @@
         @for (folder of folders(); track folder.id) {
           <li class="folder-item">
             <a class="folder-card" [routerLink]="['/explorer', folder.id]">
-              <span class="folder-card__icon" aria-hidden="true">📁</span>
+              <span class="folder-card__icon"><app-ui-icon name="folder" /></span>
               <span class="folder-card__name" [title]="folder.name">{{ folder.name }}</span>
               <span class="folder-card__date">{{ folder.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
             </a>
 
             @if (folder.ownerId === meId()) {
               <div class="folder-item__actions">
-                <button type="button" title="Compartir" [attr.aria-label]="'Compartir ' + folder.name" (click)="openShare(folder)">👥</button>
-                <button type="button" title="Renombrar" [attr.aria-label]="'Renombrar ' + folder.name" (click)="openRename(folder)">✏️</button>
-                <button type="button" title="Mover" [attr.aria-label]="'Mover ' + folder.name" (click)="openMove(folder)">📂</button>
-                <button type="button" title="Eliminar" [attr.aria-label]="'Eliminar ' + folder.name" (click)="openDelete(folder)">🗑️</button>
+                <button type="button" title="Compartir" [attr.aria-label]="'Compartir ' + folder.name" (click)="openShare(folder)"><app-ui-icon name="share" /></button>
+                <button type="button" title="Renombrar" [attr.aria-label]="'Renombrar ' + folder.name" (click)="openRename(folder)"><app-ui-icon name="rename" /></button>
+                <button type="button" title="Mover" [attr.aria-label]="'Mover ' + folder.name" (click)="openMove(folder)"><app-ui-icon name="move" /></button>
+                <button type="button" title="Eliminar" [attr.aria-label]="'Eliminar ' + folder.name" (click)="openDelete(folder)"><app-ui-icon name="delete" /></button>
               </div>
             }
           </li>

@@ -4,7 +4,7 @@
   gap: 1rem;
   height: 56px;
   padding: 0 1rem;
-  background: #fff;
+  background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -36,7 +36,7 @@
   height: 32px;
   border-radius: 50%;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-surface);
   font-weight: 600;
 }
 
@@ -48,17 +48,17 @@
 
 .navbar__role {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--color-muted);
 }
 
 .navbar__logout {
   border: 1px solid var(--color-border);
-  background: #fff;
+  background: var(--color-surface);
   border-radius: 8px;
   padding: 0.4rem 0.75rem;
   cursor: pointer;
 
-  &:hover { background: #f1f5f9; }
+  &:hover { background: var(--color-hover); }
 }
 
 @media (max-width: 768px) {

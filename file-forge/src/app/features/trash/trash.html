@@ -32,7 +32,7 @@
           @for (item of items(); track item.type + ':' + item.id) {
             <tr>
               <td class="name">
-                <span aria-hidden="true">{{ icon(item) }}</span>
+                <app-ui-icon [name]="icon(item)" />
                 <span class="name__text" [title]="item.name">{{ item.name }}</span>
               </td>
               <td>{{ item.type === 'folder' ? 'Carpeta' : 'Archivo' }}</td>
@@ -47,7 +47,7 @@
                   [disabled]="restoringId() !== null"
                   (click)="restore(item)"
                 >
-                  {{ restoringId() === item.id ? '⏳' : '↩' }}
+                  <app-ui-icon [name]="restoringId() === item.id ? 'loading' : 'restore'" />
                 </button>
                 <button
                   type="button"
@@ -55,7 +55,7 @@
                   title="Eliminar definitivamente"
                   [attr.aria-label]="'Eliminar definitivamente ' + item.name"
                   (click)="askDelete(item)"
-                >🗑️</button>
+                ><app-ui-icon name="deletePermanent" /></button>
               </td>
             </tr>
           }
