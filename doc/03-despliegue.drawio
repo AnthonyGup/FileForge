@@ -1,1 +1,58 @@
-<mxfile host="app.diagrams.net"><diagram name="Despliegue" id="dep1"><mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="600" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="nCli" value="«device»&lt;br&gt;Equipo del usuario" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;verticalAlign=top;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="40" width="300" height="360" as="geometry"/></mxCell><mxCell id="env70" value="«execution environment»&lt;br&gt;Navegador web" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#ffffff;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="70" y="100" width="240" height="270" as="geometry"/></mxCell><mxCell id="cp90_160" value="Aplicación Angular 21 LTS (SPA)" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="90" y="160" width="200" height="50" as="geometry"/></mxCell><mxCell id="cp90_230" value="Servicios HTTP, Guards e Interceptor" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="90" y="230" width="200" height="50" as="geometry"/></mxCell><mxCell id="cp90_300" value="Vistas: explorador, compartir, reportes" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="90" y="300" width="200" height="50" as="geometry"/></mxCell><mxCell id="nSrv" value="«device»&lt;br&gt;Servidor de aplicación" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;verticalAlign=top;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="460" y="40" width="300" height="360" as="geometry"/></mxCell><mxCell id="env490" value="«execution environment»&lt;br&gt;Node.js 22 LTS" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#ffffff;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="490" y="100" width="240" height="270" as="geometry"/></mxCell><mxCell id="cp510_160" value="API REST (Express)" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="510" y="160" width="200" height="50" as="geometry"/></mxCell><mxCell id="cp510_230" value="Middleware JWT y roles" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="510" y="230" width="200" height="50" as="geometry"/></mxCell><mxCell id="cp510_300" value="Driver MongoDB" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="510" y="300" width="200" height="50" as="geometry"/></mxCell><mxCell id="nDb" value="«device»&lt;br&gt;Servidor de base de datos" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;verticalAlign=top;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="880" y="40" width="300" height="360" as="geometry"/></mxCell><mxCell id="env910" value="«execution environment»&lt;br&gt;MongoDB" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#ffffff;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="910" y="100" width="240" height="270" as="geometry"/></mxCell><mxCell id="cp930_150" value="Colecciones: users, folders, files, shares, comments, activity" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="930" y="150" width="200" height="80" as="geometry"/></mxCell><mxCell id="cp930_260" value="GridFS: fs.files y fs.chunks (contenido)" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="930" y="260" width="200" height="60" as="geometry"/></mxCell><mxCell id="link0" value="HTTP / HTTPS&lt;br&gt;API REST (JSON)&lt;br&gt;puerto 3000" style="endArrow=none;html=1;strokeWidth=2;fontStyle=1;" edge="1" parent="1" source="nCli" target="nSrv"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="link1" value="Protocolo MongoDB (TCP)&lt;br&gt;puerto 27017" style="endArrow=none;html=1;strokeWidth=2;fontStyle=1;" edge="1" parent="1" source="nSrv" target="nDb"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="note" value="Solo el servidor se comunica con MongoDB. En desarrollo los tres nodos pueden ejecutarse en el mismo equipo (localhost:4200, :3000, :27017)." style="text;html=1;align=left;whiteSpace=wrap;fontSize=11;" vertex="1" parent="1"><mxGeometry x="40" y="430" width="700" height="40" as="geometry"/></mxCell></root></mxGraphModel></diagram></mxfile>
+<mxfile host="app.diagrams.net">
+  <diagram name="Despliegue" id="dep1">
+    <mxGraphModel dx="982" dy="527" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nCli" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;verticalAlign=top;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" value="«device»&lt;br&gt;Equipo del usuario" vertex="1">
+          <mxGeometry height="360" width="300" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="env70" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#ffffff;strokeColor=#82b366;" value="«execution environment»&lt;br&gt;Navegador web" vertex="1">
+          <mxGeometry height="270" width="240" x="70" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cp90_160" parent="1" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Aplicación Angular 21 LTS (SPA)" vertex="1">
+          <mxGeometry height="50" width="200" x="90" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cp90_230" parent="1" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Servicios HTTP, Guards e Interceptor" vertex="1">
+          <mxGeometry height="50" width="200" x="90" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="cp90_300" parent="1" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Vistas: explorador, compartir, reportes" vertex="1">
+          <mxGeometry height="50" width="200" x="90" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="nSrv" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;verticalAlign=top;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" value="«device»&lt;br&gt;Servidor de aplicación" vertex="1">
+          <mxGeometry height="360" width="300" x="460" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="env490" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#ffffff;strokeColor=#82b366;" value="«execution environment»&lt;br&gt;Node.js 22 LTS" vertex="1">
+          <mxGeometry height="270" width="240" x="490" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cp510_160" parent="1" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="API REST (Express)" vertex="1">
+          <mxGeometry height="50" width="200" x="510" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cp510_230" parent="1" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Middleware JWT y roles" vertex="1">
+          <mxGeometry height="50" width="200" x="510" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="cp510_300" parent="1" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Driver MongoDB" vertex="1">
+          <mxGeometry height="50" width="200" x="510" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="nDb" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;verticalAlign=top;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" value="«device»&lt;br&gt;Servidor de base de datos" vertex="1">
+          <mxGeometry height="360" width="300" x="880" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="env910" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#ffffff;strokeColor=#82b366;" value="«execution environment»&lt;br&gt;MongoDB" vertex="1">
+          <mxGeometry height="270" width="240" x="910" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cp930_150" parent="1" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Colecciones: users, folders, files, shares, comments, activity" vertex="1">
+          <mxGeometry height="80" width="200" x="930" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="cp930_260" parent="1" style="shape=module;align=left;spacingLeft=20;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="GridFS: fs.files y fs.chunks (contenido)" vertex="1">
+          <mxGeometry height="60" width="200" x="930" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="link0" edge="1" parent="1" source="nCli" style="endArrow=none;html=1;strokeWidth=2;fontStyle=1;" target="nSrv" value="HTTP / HTTPS&lt;br&gt;API REST (JSON)&lt;br&gt;puerto 3000">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="link1" edge="1" parent="1" source="nSrv" style="endArrow=none;html=1;strokeWidth=2;fontStyle=1;" target="nDb" value="Protocolo MongoDB (TCP)&lt;br&gt;puerto 27017">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

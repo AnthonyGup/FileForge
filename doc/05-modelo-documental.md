@@ -10,7 +10,6 @@ consistencia que sostienen el sistema de gestion documental.
 |---|---|---|
 | `users` | Identidad y rol | Datos de la cuenta, `role`, `active`, `storageUsed`, `lastLoginAt` |
 | `folders` | Jerarquia de carpetas | `parentId`, camino materializado `ancestors`, banderas de papelera |
-| `files` | Metadatos de archivo | `ownerId`, `folderId`, `contentId` (GridFS), banderas de papelera |
 | `comments` | Comentarios de archivo | `fileId`, autor embebido, texto |
 | `shares` | Comparticion N:M | `resourceType`, `resourceId`, `ownerId`, `sharedWithId`, `permission` |
 | `activity` | Historial inmutable | Usuario y recurso embebidos, `action`, `details` |
